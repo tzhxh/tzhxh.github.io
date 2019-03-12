@@ -68,6 +68,7 @@
 
 
 
+  <meta name="keywords" content="Anaconda,tensorflow,">
 
 
 
@@ -77,13 +78,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/index.html">
+
+<meta name="description" content="Win10下用Anaconda安装TensorFlow">
+<meta name="keywords" content="Anaconda,tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Anaconda搭建TensorFlow环境">
+<meta property="og:url" content="http://yoursite.com/2019/03/12/tensorflow-1/index.html">
 <meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="Win10下用Anaconda安装TensorFlow">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/xiazaijiemian.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/tianjiabianliang.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/minglingtai.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/navigatorshezhi.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/activate.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/test2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/cuowutishi.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/noinstall.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/test3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/Spyder.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/12/tensorflow-1/spydertensorflow.png">
+<meta property="og:updated_time" content="2019-03-12T15:00:02.791Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
+<meta name="twitter:title" content="使用Anaconda搭建TensorFlow环境">
+<meta name="twitter:description" content="Win10下用Anaconda安装TensorFlow">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/12/tensorflow-1/xiazaijiemian.png">
 
 
 
@@ -113,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/12/tensorflow-1/">
 
 
 
 
 
-  <title>Hello World</title>
+  <title>使用Anaconda搭建TensorFlow环境 | Hello World</title>
   
 
 
@@ -138,8 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -212,9 +230,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -244,9 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/12/tensorflow-1/" itemprop="url">使用Anaconda搭建TensorFlow环境</a></h1>
+          <h1 class="post-title" itemprop="name headline">使用Anaconda搭建TensorFlow环境</h1>
         
 
         <div class="post-meta">
@@ -296,18 +312,23 @@
       
 
       
-        
-          <p>Win10下用Anaconda安装TensorFlow<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/12/tensorflow-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>Win10下用Anaconda安装TensorFlow<br><a id="more"></a></p>
+<font size="4">1.安装Anaconda</font><br>选择相应的<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">Anaconda</a>进行安装,根据自己系统选择版本，我选的是Python 3.7 version 64-Bit<br><img src="xiazaijiemian.png" alt><br>和普通软件安装一样，选择全部默认即可，注意勾选将    python3.7添加进环境变量<br><img src="tianjiabianliang.png" alt><br>安装好Anaconda之后通过以下命令来查看Anaconda已经安装哪些包。<br>运行<font style="color: red">开始菜单-Anaconda3-Anaconda Prompt</font><br><code>conda list<br></code><br>可以看到已经安装了 numpy,sympy等常用包。<br><br><font size="4">2.安装Tensorflow</font><br>TensorFlow目前在Windows下只支持Python3.5版本。<br><br>（1）打开Anaconda Prompt，输入清华仓库镜像，这样更新会快一些：<br><img src="minglingtai.png" alt><br><code>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a><br>    conda config –set show_channel_urls yes<br></code><br><br>(2)同样在Anaconda Prompt中利用Anaconda创建一个python3.5的环境，环境名称为tensorflow ，输入下面命令：<br><code>conda create -n tensorflow python=3.5<br></code><br>运行<font style="color: red">开始菜单-&gt;Anaconda3—&gt;Anaconda Navigator</font>，点击左侧的<font style="color: red">Environments</font> ，可以看到<font style="color: red">tensorflow</font>的环境已经创建好了。<br><img src="navigatorshezhi.png" alt><br><br>(3)在anaconda prompt中启动tenso环境<br><code>activate tensorflow<br></code><br><img src="activate.png" alt><br><br><font style=";color: red">当不使用TensorFlow环境时 用deactivate命令关闭环境</font>
+
+<p>(4)安装CPU版本的TensorFlow<br><code>pip install –upgrade –ignore-installed tensorflow<br></code><br>这样TensorFlow就安装好了</p>
+<p>(5)测试TensorFlow<br>在Anaconda Prompt中启动tensorflow环境，并进入python环境。<br>！<a href="test1.png"></a><br><img src="test2.png" alt></p>
+<p><font size="4">3.其他问题</font><br>或许到这里我们并没有满足，我们在Anaconda自带的ipython 和Spyder中import tensorflow的时候一直失败，提示 <font style="color: red">No module named ‘tensorflow’</font> ，如下图，那是因为我们没有在tensorflow的环境下打开它们。<br><img src="cuowutishi.png" alt></p>
+<p>为了能在ipython 和Spyder中使用tensorflow，我们需要在tensorflow的环境中安装这两个的插件。</p>
+<p>打开<font style="color: red"> Anaconda Navigator</font>，选择<font style="color: red">Not installed</font>，找到 ipython和Spyder并安装，笔者这里已经安装好，所以在这个页面没有显示。<br><img src="noinstall.png" alt></p>
+<p>安装好插件后，我们需要测试一下。</p>
+<p>在Anaconda Prompt中启动tensorflow环境，并运行ipython，import tensorflow发现成功: </p>
+<p><img src="test3.png" alt="ipython"></p>
+<p>同样，在Anaconda Prompt中启动tensorflow环境，并运行Spyder，等一会儿后会启动Spyder IDE，import tensorflow 同样成功:</p>
+<p><img src="Spyder.png" alt="spyder"></p>
+<p>一定要运行 Spyder(tensorflow)<br><img src="spydertensorflow.png" alt></p>
+
       
-    </p></div>
+    </div>
     
     
     
@@ -320,138 +341,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tzhxh">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/04/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T16:19:10+08:00">
-                2019-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Anaconda/" rel="tag"># Anaconda</a>
           
-            
+            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p> 测试文档
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/04/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/04/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -461,10 +382,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -472,6 +394,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -673,6 +599,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
