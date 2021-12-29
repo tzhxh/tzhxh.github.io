@@ -1,37 +1,817 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="android,2021,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文使用    Google官方提供的一个apiApplication.ActivityLifecycleCallbacks来实现">
+<meta name="keywords" content="android,2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录统计Android App 使用时长的一种方法">
+<meta property="og:url" content="http://yoursite.com/2021/02/28/android-user-app-time/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="本文使用    Google官方提供的一个apiApplication.ActivityLifecycleCallbacks来实现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-03-28T02:23:34.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录统计Android App 使用时长的一种方法">
+<meta name="twitter:description" content="本文使用    Google官方提供的一个apiApplication.ActivityLifecycleCallbacks来实现">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/02/28/android-user-app-time/">
+
+
+
+
+
+  <title>记录统计Android App 使用时长的一种方法 | Hello World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hello World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/28/android-user-app-time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tzhxh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记录统计Android App 使用时长的一种方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-28T11:03:22+08:00">
+                2021-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文使用    Google官方提供的一个api<font color="red">Application.ActivityLifecycleCallbacks</font>来实现</p>
+<a id="more"></a>
+<p>使用ActivityLifecycleCallbacks接口来实现统计应用时长的功能<br><code></code></p>
+<p>import android.app.Activity;<br>    import android.app.Application;<br>    import android.content.Context;<br>    import android.os.Bundle;<br>    import android.os.PowerManager;</p>
+<pre><code>import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.readboy.diagnose.bean.UserTimeResult;
+import com.readboy.diagnose.net.BaseRequest;
+import com.readboy.diagnose.net.RequestInterface;
+import com.readboy.diagnose.util.SharedPreferencesUtil;
+import com.readboy.diagnose.util.UserUtil;
+import com.readboy.diagnose.util.log.LogUtils;
+
+import org.jetbrains.annotations.NotNull;
+
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class ActivityLifeCycle implements Application.ActivityLifecycleCallbacks {
+
+    // 上次检查时间， 用于在运行时作为基准获取用户时间
+    public static long lastCheckTime = 0;
+
+    // 前台Activity数量
+    private int foregroundActivityCount = 0;
+
+    // Activity是否在修改配置
+    private boolean isChangingConfigActivity = false;
+
+    // 应用将要切换到前台
+    private boolean willSwitchToForeground = false;
+
+    //当前是否在前台
+    private boolean isForegroundNow = false;
+
+    // 上次暂停的Activity信息
+    private String lastPauseActivityName;
+    private int lastPausedActivityHashCode;
+    private long lastPauseTime;
+    private long appUseReduceTime = 0;
+
+    // 每次有Activity启动时的开始时间点
+    private long appStartTime = 0L;
+
+    //本次统计时，运行的时间
+    private long runTimeThisDay = 0L;
+
+    private final String APP_USE_TIME = &quot;appUserTime&quot;;
+
+    Disposable disposable;
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+
+        // 前台没有Activity, 说明新启动或者将从后台恢复
+        if (foregroundActivityCount == 0 || !isForegroundNow) {
+            willSwitchToForeground = true;
+        } else {
+            // 应用已经在前台， 此时保存今天运行的时间
+            runTimeThisDay = System.currentTimeMillis() - appStartTime;
+            lastCheckTime = System.currentTimeMillis();
+            saveTodayPlayTime(runTimeThisDay);
+        }
+        appStartTime = System.currentTimeMillis();
+        if (isChangingConfigActivity) {
+            isChangingConfigActivity = false;
+            return;
+        }
+        foregroundActivityCount += 1;
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+        // 在这里更新检查时间点，是为了保证从后台恢复到前台，持续计时的准确性
+        lastCheckTime = System.currentTimeMillis();
+        addAppUseReduceTimeIfNeeded(activity);
+        if (willSwitchToForeground &amp;&amp; isInteractive(activity)) {
+            isForegroundNow = true;
+        }
+        if (isForegroundNow) {
+            willSwitchToForeground = false;
+        }
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+        lastPauseActivityName = getActivityName(activity);
+        lastPausedActivityHashCode = activity.hashCode();
+        lastPauseTime = System.currentTimeMillis();
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+        addAppUseReduceTimeIfNeeded(activity);
+        // 如果这个Activity是在修改配置，如旋转等，则不保存时间直接返回
+        if (activity.isChangingConfigurations()) {
+            isChangingConfigActivity = true;
+            return;
+        }
+        // 该Activity 要进入后台， 前台Activity数量-1.
+        foregroundActivityCount -= 1;
+        // 如果当前是最后一个Activity, 代表此时应用退出，保存时间。
+        if (foregroundActivityCount == 0) {
+            LogUtils.d(&quot;onActivityStopped ===&gt; &quot;);
+            isForegroundNow = false;
+            runTimeThisDay = System.currentTimeMillis() - appStartTime;
+            saveTodayPlayTime(runTimeThisDay);
+            postUserTime();
+            lastCheckTime = System.currentTimeMillis();
+        }
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+        runTimeThisDay = System.currentTimeMillis() - appStartTime;
+
+        lastCheckTime = System.currentTimeMillis();
+        // 如果当前是最后一个Activity, 代表此时应用退出，清除章节id缓存。
+        if (foregroundActivityCount == 0) {
+            SharedPreferencesUtil.remove(&quot;sectionId&quot;);
+            LogUtils.d(&quot;===&gt; clear sectionId&quot;);
+        }
+    }
+
+    private void addAppUseReduceTimeIfNeeded(Activity activity) {
+        if (getActivityName(activity).equals(lastPauseActivityName) &amp;&amp; activity.hashCode() == lastPausedActivityHashCode) {
+            long now = System.currentTimeMillis();
+            if (now - lastPauseTime &gt; 1000) {
+                appUseReduceTime += now - lastPauseTime;
+            }
+        }
+        lastPausedActivityHashCode = -1;
+        lastPauseActivityName = null;
+        lastPauseTime = 0;
+    }
+
+    private boolean isInteractive(Context context) {
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        return pm.isInteractive();
+    }
+
+    private String getActivityName(final Activity activity) {
+        return activity.getClass().getCanonicalName();
+    }
+
+    private void saveTodayPlayTime(long time) {
+        long useTime = SharedPreferencesUtil.getLong(APP_USE_TIME, 0L);
+
+    }
+
+    private void postUserTime() {
+
+
+
+    }
+}
+</code></pre><p></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+            <a href="/tags/2021/" rel="tag"># 2021</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/03/segmentfault-3/" rel="next" title="在项目中使用layer弹出层插件">
+                <i class="fa fa-chevron-left"></i> 在项目中使用layer弹出层插件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/07/ActivityLifecycleCallback/" rel="prev" title="android ActivityLifecycleCallback接口">
+                android ActivityLifecycleCallback接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tzhxh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tzhxh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

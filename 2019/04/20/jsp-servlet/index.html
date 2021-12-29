@@ -1,37 +1,1122 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="jsp,web,servlet,2019,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用jsp和servlet实现一个简单的登录跳转功能的页面">
+<meta name="keywords" content="jsp,web,servlet,2019">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp+servlet实现简单的登录跳转功能">
+<meta property="og:url" content="http://yoursite.com/2019/04/20/jsp-servlet/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="用jsp和servlet实现一个简单的登录跳转功能的页面">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet/mulv.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet/login.png">
+<meta property="og:updated_time" content="2021-02-28T02:58:08.212Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsp+servlet实现简单的登录跳转功能">
+<meta name="twitter:description" content="用jsp和servlet实现一个简单的登录跳转功能的页面">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/20/jsp-servlet/mulv.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/20/jsp-servlet/">
+
+
+
+
+
+  <title>jsp+servlet实现简单的登录跳转功能 | Hello World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hello World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/jsp-servlet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tzhxh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">jsp+servlet实现简单的登录跳转功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-20T22:02:32+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用jsp和servlet实现一个简单的登录跳转功能的页面<br><a id="more"></a></p>
+<p></p><h3>主要流程</h3><br>1.首先在Tomcat的webapps文件夹下创建一个新的文件夹，并将jsp文件存放在该目录下<br>这里我将文件夹命名为login<br>2.在login文件夹下再新建一个名为WEB-INF的文件夹，用来存放命名为web.xml<br>的配置文件，<br>3.在WEN-INF文件下再新建一个名为classes的文件夹，用来存放servlet文件<br><strong style="font-weight: bold;">(若servlet文件有包，则文件结构为classes - 包名(文件夹) - servlet文件名.class)</strong><br>4.将编写好的 .java编译为.class 文件后放入指定目录，并修改配置文件<p></p>
+<p></p><h5>目录结构为：</h5><br><img src="mulv.png" alt><p></p>
+<p></p><h3>简单示例</h3><br>实现简单的登录跳转功能，首先进入到登录页面，在登录页面输入用户名，密码。点击提交。<br>跳转到loginServlet中判断用户名和密码是否正确，若正确则跳转到工作页面，若不正确跳转回登录页面<br>共有4个文件组成 分别为 登录页面(login.jsp) 工作页面(page.jsp) servlet文件(LogonServlet.java) 和配置文件(web.xml)<br>代码如下：<p></p>
+<p></p><h4>login.jsp</h4><br>简单的登录界面，输入用户名和密码之后点击提交按钮进行跳转<p></p>
+<p></p><h5><div><div class="fold_hider"><div class="close hider_title">点击显示/隐藏代码</div></div><div class="fold">
+<p><br><code></code></p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=utf-8&quot;
+         pageEncoding=&quot;utf-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;登录界面&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        #context{
+            width: 20%;
+            margin: auto auto;
+        }
+        #check{
+            margin: 200px auto;
+        }
+        #tip{
+            margin-top: 400px;
+            font-size: small;
+            color: red;
+        }
+        #sub{
+            width: 80px;
+            height: 30px;
+            margin: 30px auto;
+            border: 0;
+            border-radius: 5px;
+            background-color: #4f93ff;
+            color: white;
+            font-size: medium;
+            font-style: inherit;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;context&quot;&gt;
+    &lt;div id=&quot;check&quot;&gt;
+        &lt;form action=&quot;loginServlet&quot; method=&quot;post&quot;&gt;
+            &lt;label for=&quot;username&quot;&gt;&lt;strong&gt;用户名：&lt;/strong&gt;&lt;/label&gt;&lt;br&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;&lt;br&gt;
+            &lt;label for=&quot;password&quot;&gt;&lt;strong&gt;密码：&lt;/strong&gt;&lt;/label&gt;&lt;br&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; id=&quot;password&quot;&gt;&lt;br&gt;
+            &lt;input type=&quot;submit&quot; id=&quot;sub&quot; value=&quot;登录&quot;&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;tip&quot;&gt;
+        &lt;p&gt;用户名或密码为admin即可登录&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p></p>
+
+</div></div><p></p>
+<p></p><h5>效果如下</h5><br><img src="login.png" alt><p></p>
+<p></p><h4>page.jsp</h4><br>一个简单的工作页面，此处为一个问卷调查页面，将登录者的用户名显示在右上角<p></p>
+<p></p><h5><div><div class="fold_hider"><div class="close hider_title">点击显示/隐藏代码</div></div><div class="fold">
+<p><br><code></code></p>
+<pre><code>&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=utf-8&quot;
+     pageEncoding=&quot;utf-8&quot;%&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;调查问卷&lt;/title&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        body{
+            margin: 0;
+            background-image: url(&quot;true_3.jpg&quot;);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+        #context{
+            height: auto;
+            width: 60%;
+            background-color: white;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-left: 20%;
+        }
+        #headding{
+            height: 100px;
+            margin: 0;
+            border: 0;
+            padding: 0;
+        }
+        #body{
+            height: auto;
+            margin-top: 0;
+            border: 0;
+            padding: 0;
+        }
+        #footing{
+            height: 50px;
+            background-color: white;
+            border: 0;
+            margin-top: 0px;
+        }
+        #day{
+            width: 200px;
+            margin: 30px auto;
+            font-size: smaller;
+            color: #ff0f8b;
+        }
+        #info{
+            width: auto;
+            height: auto;
+            float: right;
+            margin: 0 10px;
+        }
+        #infom{
+            color: #298cff;
+            font-size: smaller;
+            font-style: italic;
+        }
+        #title{
+            width: 400px;
+            text-align: center;
+            line-height: 100px;
+            color: aqua;
+            margin: auto auto;
+        }
+        #ques{
+            width: 70%;
+            margin: 0 auto;
+        }
+        #sel_sch{
+            display: none;
+        }
+        #sub{
+            width: 80px;
+            height: 30px;
+            margin-left: 38%;
+            border: 0;
+            border-radius: 5px;
+            background-color: #4f93ff;
+            color: white;
+            font-size: medium;
+            font-style: inherit;
+        }
+        .rad{
+            margin: 10px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;context&quot;&gt;
+    &lt;div id=&quot;headding&quot;&gt;
+        &lt;div id=&quot;info&quot;&gt;
+            &lt;p id=&quot;infom&quot;&gt;亲爱的&quot;&lt;%=request.getParameter(&quot;name&quot;)%&gt;&quot;，欢迎您&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;title&quot;&gt;
+            &lt;h2&gt;学生消费情况问卷调查&lt;/h2&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;body&quot;&gt;
+
+        &lt;div id=&quot;ques&quot;&gt;
+
+            &lt;form class=&quot;rad&quot; action=&quot;&quot;&gt;
+                &lt;h3&gt;1.您的性别&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; id=&quot;man&quot; name=&quot;sex&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;man&quot;&gt;男&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; id=&quot;women&quot; name=&quot;sex&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;women&quot;&gt;女&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;br&gt;
+                    &lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;2.您的当前学历&lt;/h3&gt;
+                &lt;div&gt;
+                    &lt;select id=&quot;sel&quot; required onchange=&quot;sel_edu&quot;&gt;
+                        &lt;option&gt;&lt;/option&gt;
+                        &lt;option value=&quot;高中以下&quot;&gt;高中以下&lt;/option&gt;
+                        &lt;option value=&quot;高中&quot;&gt;高中&lt;/option&gt;
+                        &lt;option value=&quot;专科&quot;&gt;专科&lt;/option&gt;
+                        &lt;option value=&quot;本科&quot;&gt;本科&lt;/option&gt;
+                        &lt;option value=&quot;硕士&quot;&gt;硕士&lt;/option&gt;
+                        &lt;option value=&quot;博士&quot;&gt;博士&lt;/option&gt;
+                    &lt;/select&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;script&gt;
+                    function sel_edu() {
+                        var index = document.getElementById(&quot;sel&quot;).value;
+                        if(index===&quot;本科&quot;||index===&quot;硕士&quot;||index===&quot;博士&quot;)
+                        {
+                            document.getElementById(&quot;sel_sch&quot;).style.display=&quot;block&quot;;
+                        }
+                        else
+                        {
+                            document.getElementById(&quot;sel_sch&quot;).style.display=&quot;none&quot;;
+                        }
+                    }
+                &lt;/script&gt;
+
+
+                &lt;div id=&quot;sel_sch&quot;&gt;
+                    &lt;h3&gt;就读学校&lt;/h3&gt;
+                    &lt;input type=&quot;text&quot; name=&quot;sch&quot; list=&quot;sch&quot;&gt;
+                    &lt;datalist id=&quot;sch&quot;&gt;
+                        &lt;option&gt;&lt;/option&gt;
+                        &lt;option value=&quot;北京大学&quot;&gt;北京大学&lt;/option&gt;
+                        &lt;option value=&quot;清华大学&quot;&gt;清华大学&lt;/option&gt;
+                        &lt;option value=&quot;复旦大学&quot;&gt;复旦大学&lt;/option&gt;
+                        &lt;option value=&quot;中山大学&quot;&gt;中山大学&lt;/option&gt;
+                        &lt;option value=&quot;华南理工大学&quot;&gt;华南理工大学&lt;/option&gt;
+                        &lt;option value=&quot;华南师范大学&quot;&gt;华南师范大学&lt;/option&gt;
+                        &lt;option value=&quot;华南农业大学&quot;&gt;华南农业大学&lt;/option&gt;
+                        &lt;option value=&quot;暨南大学&quot;&gt;暨南大学&lt;/option&gt;
+                        &lt;option value=&quot;深圳大学&quot;&gt;深圳大学&lt;/option&gt;
+                        &lt;option value=&quot;广州大学&quot;&gt;广州大学&lt;/option&gt;
+                        &lt;option value=&quot;广东工业大学&quot;&gt;广东工业大学&lt;/option&gt;
+                    &lt;/datalist&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;3.在校期间的平均月消费&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;cost&quot; id=&quot;normal&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;normal&quot;&gt;600 - 1000&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;cost&quot; id=&quot;much&quot; class=&quot;rad&quot;  required&gt;
+                    &lt;label for=&quot;much&quot;&gt;1000 - 1500&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;cost&quot; id=&quot;very_m&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;very_m&quot;&gt;1500 - 2000&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;cost&quot; id=&quot;rich&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;rich&quot;&gt;2000 以上&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;4.每月用于零食及校外饮食费用&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outcost&quot; id=&quot;onormal&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;onormal&quot;&gt;无&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outcost&quot; id=&quot;omuch&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;omuch&quot;&gt;1 - 200&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outcost&quot; id=&quot;overy_m&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;overy_m&quot;&gt;200 - 500&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outcost&quot; id=&quot;orich&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;orich&quot;&gt;500 以上&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;5.与朋友或同学聚餐次数&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outeat&quot; id=&quot;less&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;less&quot;&gt;从不&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outeat&quot; id=&quot;normal&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;normal&quot;&gt;一月一次到两次&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outeat&quot; id=&quot;much&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;much&quot;&gt;一月三次到四次&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outeat&quot; id=&quot;verymuch&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;verymuch&quot;&gt;一周一到两次&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;6.每学期用于购买学习资料，课外读物的费用&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outread&quot; id=&quot;rless&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;rless&quot;&gt;无&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outread&quot; id=&quot;rnormal&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;rnormal&quot;&gt;1 - 100&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outread&quot; id=&quot;rmuch&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;rmuch&quot;&gt;100 - 200&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;outread&quot; id=&quot;rverymuch&quot; class=&quot;rad&quot; required&gt;
+                    &lt;label for=&quot;rverymuch&quot;&gt;200以上&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;7.您觉得自己的生活费&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;enough&quot; id=&quot;eless&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;eless&quot;&gt;有富余&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;enough&quot; id=&quot;enormal&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;enormal&quot;&gt;刚好够用&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;radio&quot; name=&quot;enough&quot; id=&quot;emuch&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;emuch&quot;&gt;不够&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;8.您的月消费多用在哪些方面&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;eat&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;eat&quot;&gt;伙食&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;cloth&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;cloth&quot;&gt;购置衣物&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;traffic&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;traffic&quot;&gt;交通，通讯&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;dailyuse&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;dailyuse&quot;&gt;生活用品&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;communicative&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;communicative&quot;&gt;日常交际&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;study&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;study&quot;&gt;学习用品&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;useto&quot; id=&quot;relax&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;relax&quot;&gt;娱乐旅游&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;9.您会用哪些预支方式付款&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;adpay&quot; id=&quot;never&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;never&quot;&gt;从不&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;adpay&quot; id=&quot;huabei&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;huabei&quot;&gt;花呗&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;adpay&quot; id=&quot;jiabei&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;jiabei&quot;&gt;借呗&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;adpay&quot; id=&quot;creditcard&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;creditcard&quot;&gt;信用卡&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;adpay&quot; id=&quot;other&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;other&quot;&gt;其他&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+
+                &lt;h3&gt;10.每月生活费有余时，你会把它用于&lt;/h3&gt;
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;seat&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;seat&quot;&gt;吃喝&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;travel&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;travel&quot;&gt;旅游&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;buyclouth&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;buyclouth&quot;&gt;添置衣物&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;buybook&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;buybook&quot;&gt;买书&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;save&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;save&quot;&gt;存起来&lt;/label&gt;
+                    &lt;br&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;spare&quot; id=&quot;sother&quot; class=&quot;rad&quot;&gt;
+                    &lt;label for=&quot;sother&quot;&gt;其他&lt;/label&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+                &lt;div class=&quot;rad&quot;&gt;
+                    &lt;br&gt;&lt;br&gt;
+                    &lt;input type=&quot;submit&quot; class=&quot;rad&quot; id=&quot;sub&quot; value=&quot;提交&quot;&gt;
+                    &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;hr color=&quot;aliceblue&quot; &gt;
+                &lt;/div&gt;
+
+            &lt;/form&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;div id=&quot;footing&quot;&gt;
+        &lt;p id=&quot;day&quot;&gt;-----2019-04-09-----&lt;/p&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p></p>
+
+</div></div><p></p>
+<p></p><h4>LoginServlet.jsp</h4><br>一个简单的判断跳转的servlet，逻辑为只要用户名或者密码为admin的都可以登录<p></p>
+<p></p><h5><div><div class="fold_hider"><div class="close hider_title">点击显示/隐藏代码</div></div><div class="fold">
+<p><br><code></code></p>
+<pre><code>package loginServlet;
+
+import java.io.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
+
+public class LoginServlet extends HttpServlet{
+
+private static final long serialVersionUID = 1L;    
+
+protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
+    String name = request.getParameter(&quot;username&quot;);
+    String word = request.getParameter(&quot;password&quot;);
+    if(&quot;admin&quot;.equals(name)||&quot;admin&quot;.equals(word))
+    {
+        response.sendRedirect(&quot;page.jsp?name=&quot;+name);
+    }
+    else
+    {
+        request.getRequestDispatcher(&quot;login.jsp&quot;).forward(request, response);
+    }
+}
+}
+</code></pre><p></p>
+
+</div></div><p></p>
+<p></p><h4>web.xml</h4><br>配置文件<br>头部可以在webapps文件夹下的manager中找到它的web.xml进行复制<br>在 servlet 标签中的是配置文件的主要部分 两个servlet-name可以任意取名<br>但必须要一致<br>servlet-class中的内容为存放的路径 这里表示loginServlet包<br>下的LoginServlet.class文件 .class后缀要省去<br>url-pattern 是自己填写的路径名 可以随意填写 但注意最左侧的”/“不能缺省<br>在浏览器中打开时输入 localhost:8080/工程文件夹/自定义的url-pattern<p></p>
+<p></p><h5><div><div class="fold_hider"><div class="close hider_title">点击显示/隐藏代码</div></div><div class="fold">
+<p><br><code></code></p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+  xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+  xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+  version=&quot;4.0&quot;
+  metadata-complete=&quot;true&quot;&gt;
+
+&lt;servlet&gt;
+
+      &lt;servlet-name&gt;loginServlet&lt;/servlet-name&gt;
+
+      &lt;servlet-class&gt;loginServlet.LoginServlet&lt;/servlet-class&gt;
+
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+
+     &lt;servlet-name&gt;loginServlet&lt;/servlet-name&gt;
+
+     &lt;url-pattern&gt;/loginServlet&lt;/url-pattern&gt;
+
+&lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre><p></p>
+
+</div></div><p></p>
+<p></p><h3>展示</h3><br>在Tomcat的bin文件夹下找到startup.bat文件双击即可开启服务<br>开启服务后在浏览器中输入路径<a href="http://localhost:8080/login/login.jsp" target="_blank" rel="noopener">http://localhost:8080/login/login.jsp</a><br>其中localhost是本地的ip，8080为Tomcat的默认端口，webapps下的工程文件夹的名字(根据自己建立的文件夹来修改),login.jsp是要打开的页面(根据自己的名称修改)<br>结束时双击bin文件夹下的shutdown.bat来关闭服务<p></p>
+</h5></h5></h5></h5>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jsp/" rel="tag"># jsp</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/servlet/" rel="tag"># servlet</a>
+          
+            <a href="/tags/2019/" rel="tag"># 2019</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/html-register-tem/" rel="next" title="用户注册界面模板">
+                <i class="fa fa-chevron-left"></i> 用户注册界面模板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/20/jsp-servlet-javabean/" rel="prev" title="jsp+servlet+javabean实现对数据库的操作">
+                jsp+servlet+javabean实现对数据库的操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tzhxh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tzhxh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
