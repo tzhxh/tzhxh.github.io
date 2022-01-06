@@ -68,7 +68,6 @@
 
 
 
-  <meta name="keywords" content="2019,javascript,前端,">
 
 
 
@@ -78,19 +77,13 @@
 
 
 
-
-<meta name="description" content="对开发中遇到的问题进行一些总结，记录关于封装的一些要点">
-<meta name="keywords" content="2019,javascript,前端">
-<meta property="og:type" content="article">
-<meta property="og:title" content="前端的一些笔记">
-<meta property="og:url" content="http://yoursite.com/2019/11/03/segmentfault-1/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hello World">
+<meta property="og:url" content="http://yoursite.com/archives/2022/index.html">
 <meta property="og:site_name" content="Hello World">
-<meta property="og:description" content="对开发中遇到的问题进行一些总结，记录关于封装的一些要点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-28T02:53:19.665Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端的一些笔记">
-<meta name="twitter:description" content="对开发中遇到的问题进行一些总结，记录关于封装的一些要点">
+<meta name="twitter:title" content="Hello World">
 
 
 
@@ -120,13 +113,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/11/03/segmentfault-1/">
+  <link rel="canonical" href="http://yoursite.com/archives/2022/">
 
 
 
 
 
-  <title>前端的一些笔记 | Hello World</title>
+  <title>归档 | Hello World</title>
   
 
 
@@ -145,7 +138,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -219,169 +212,72 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 16 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2022">2022</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/03/segmentfault-1/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tzhxh">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello World">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">前端的一些笔记</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2022/01/06/git-use-summary/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">git使用小结</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T15:30:07+08:00">
-                2019-11-03
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2022-01-06T16:42:19+08:00" content="2022-01-06">
+          01-06
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>对开发中遇到的问题进行一些总结，记录关于封装的一些要点</p>
-<a id="more"></a>
-<p>将要封装的内容写到一个 <code>.js</code> 文件中,在需要用到的HTML页面中用<br> <code>script</code>标签引入就可使用，</p>
-<p>首先创建一个静态类，可以不需要实例化直接使用<br><code></code></p>
-<pre><code>var common = function () {};
-</code></pre><p><br>然后为这个类添加属性<br><code></code></p>
-<pre><code>common.xxx = undefined/null/boolean/number/string   //五种基本数据类型
-common.xxx = {}                                     //object 引用数据类型
-</code></pre><p><br>此处封装了ajax ， 使用的是原生ajax。完整代码如下；<br><code></code></p>
-<pre><code>var common = function () {};
-</code></pre><p>common.service = {<br>    post: function (url, data, callback) {<br>        let request = new XMLHttpRequest();<br>        request.open(“post”, url, true);<br>        request.setRequestHeader(“Content-type”, “application/json;charset=utf-8”);<br>        request.send(JSON.stringify(data));<br>        request.onreadystatechange = function () {<br>            if (request.readyState == 4) {<br>                if (request.status == 200) {<br>                    callback(request.responseText);<br>                }<br>            }<br>        };<br>    },<br>    get: function (url, data, callback) {<br>        let request = new XMLHttpRequest();<br>        request.open(“get”, url, true);<br>        request.setRequestHeader(“Content-type”, “application/json;charset=utf-8”);<br>        request.send(JSON.stringify(data));<br>        request.onreadystatechange = function () {<br>            if (request.readyState == 4) {<br>                if (request.status == 200) {<br>                    callback(request.responseText);<br>                }<br>            }<br>        };<br>    },<br>};</p>
-<p><br>一共三个参数 url为路径 ， data为要发送的json数据 ，callback 为回调函数 以返回的数据作为实参<br>在调用时可以按如下方法使用<br><code></code></p>
-<p>common.service.post(url,data,function (data) {                //todo url填入路径类型为string当前为登录路径 ,data 为一个对象{key:value,key:value}</p>
-<pre><code>})
-</code></pre><p></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/2019/" rel="tag"># 2019</a>
-          
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
-          
-            <a href="/tags/前端/" rel="tag"># 前端</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/20/jsp-servlet-javabean/" rel="next" title="jsp+servlet+javabean实现对数据库的操作">
-                <i class="fa fa-chevron-left"></i> jsp+servlet+javabean实现对数据库的操作
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/03/segmentfault-2/" rel="prev" title="关于post第一次失败，后面可以成功的问题记录">
-                关于post第一次失败，后面可以成功的问题记录 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -389,10 +285,6 @@ common.xxx = {}                                     //object 引用数据类型
 
 
           
-
-  
-
-
 
         </div>
         
@@ -594,10 +486,6 @@ common.xxx = {}                                     //object 引用数据类型
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
