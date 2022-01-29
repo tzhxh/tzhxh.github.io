@@ -302,9 +302,9 @@
       
         <p>现在要来写写关于绘制的东西了，其实有篇<a href="https://hencoder.com/tag/hui-zhi/" target="_blank" rel="noopener">教程</a>已经写的很好了，但还是希望能够自己总结一下，记忆和理解可能会更深刻一点</p>
 <a id="more"></a>
-<p>首先，绘制需要一个画布，那就是<em>Canvas</em>,然后需要一支笔<em>Paint</em>,有了这两个东西之后，就可以把东西画出来了。但是问题来了，这两个东西从哪来，<em>Paint</em>和<em>Canvas</em>都可以<em>new</em>出来。就可以绘制了，怎么绘制后面再说，这里先说一个我遇到的问题和疑惑。<br>我们使用new出来的canvas和paint画好之后怎么不显示呢，我该怎么让他显示出来呢。。。这个问题我后面再去研究一下，或许是直接保存成bitmap然后设置到imageView里吧，我也还没试过。<br>由于不知道怎么显示，所以改成使用自定义view里的<em>onDraw()</em>方法，然而其实<strong><br>自定义绘制的方式是重写绘制方法，其中最常用的是<em>onDraw()</em></strong> 以上那句是教程中的原话，所以我们自定义绘制用的<em>Canvas</em>就是<em>onDraw()</em>方法提供的canva</p>
-<p>其他教程里有的我就不多说了，<br>还想提一点就是 canvas的drawXXX()方法，其实都可以用drawPath配合上path来实现</p>
-<p>但除了drawxxx()之外，绘制还有范围裁剪，几何变换等，还有绘制顺序，硬件加速等，<br>多看看<a href="https://hencoder.com/ui-1-1/" target="_blank" rel="noopener">教程</a>，然后来写总结吧</p>
+<p>首先，绘制需要一个画布，那就是<em>Canvas</em>,然后需要一支笔<em>Paint</em>,有了这两个东西之后，就可以把东西画出来了。但是问题来了，这两个东西从哪来，<em>Paint</em>和<em>Canvas</em>都可以<em>new</em>出来。就可以绘制了，怎么绘制后面再说，这里先说一个我遇到的问题和疑惑。 我们使用new出来的canvas和paint画好之后怎么不显示呢，我该怎么让他显示出来呢。。。这个问题我后面再去研究一下，或许是直接保存成bitmap然后设置到imageView里吧，我也还没试过。 由于不知道怎么显示，所以改成使用自定义view里的<em>onDraw()</em>方法，然而其实<strong> 自定义绘制的方式是重写绘制方法，其中最常用的是<em>onDraw()</em></strong> 以上那句是教程中的原话，所以我们自定义绘制用的<em>Canvas</em>就是<em>onDraw()</em>方法提供的canva</p>
+<p>其他教程里有的我就不多说了， 还想提一点就是 canvas的drawXXX()方法，其实都可以用drawPath配合上path来实现</p>
+<p>但除了drawxxx()之外，绘制还有范围裁剪，几何变换等，还有绘制顺序，硬件加速等， 多看看<a href="https://hencoder.com/ui-1-1/" target="_blank" rel="noopener">教程</a>，然后来写总结吧</p>
 
       
     </div>
@@ -417,7 +417,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -430,7 +430,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

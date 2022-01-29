@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="webgl,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="真实感光照模型 webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真">
+<meta name="keywords" content="webgl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="真实感光照模型">
+<meta property="og:url" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/index.html">
+<meta property="og:site_name" content="Hello World">
+<meta property="og:description" content="真实感光照模型 webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p1.png">
+<meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p2.png">
+<meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p3.png">
+<meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p4.png">
+<meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p5.png">
+<meta property="og:updated_time" content="2022-01-29T03:56:34.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="真实感光照模型">
+<meta name="twitter:description" content="真实感光照模型 webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真">
+<meta name="twitter:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/01/29/webgl-realistic-lighting/">
+
+
+
+
+
+  <title>真实感光照模型 | Hello World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hello World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/01/29/webgl-realistic-lighting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tzhxh">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">真实感光照模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-29T10:09:47+08:00">
+                2022-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="真实感光照模型">真实感光照模型</h3>
+<p>webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真实效果。</p>
+<p>全局光照模型有：光线追踪算法、辐射度算法、光子映射等</p>
+<p>局部光照模型有Lambert漫反射模型、Phong模型、Blinn-Phong反射模型等。</p>
+<p>这里就只介绍局部光照模型</p>
+<a id="more"></a>
+<h4 id="环境光">环境光</h4>
+<p>一个物体表面即使不直接暴露于光源之下，只要其周围的物体被照明，它也可能看得见。在基本光照模型中，只须改变一个场景的基准光亮度，就可以简单的模拟一种从不同物体表面所产生的统一照明，称为环境光或者背景光也称泛光。环境光是从某个光源发出并由环境多次反射得到的。环境光没有空间或者方向上的特征，在所有方向上和所有物体表面上投射的环境光数量都恒定不变，其强度为： <span class="math display">\[
+I_{amb} = k_aI_a
+\]</span> 其中参数<span class="math inline">\(I_a\)</span>用来表示场景中的环境光亮度。环境光是一个适当的经验值，并不直接对应于真实材料的任何物理属性。那么物体表面反射得到的环境光亮度<span class="math inline">\(I_{amb}\)</span>由反射光系数<span class="math inline">\(k_a\)</span>决定（其取值范围为0到1）.环境光反射系数是一个材质属性。</p>
+<h4 id="漫反射光和lambert模型">漫反射光和Lambert模型</h4>
+<p>暗的粗糙表面，如粉笔，展现出漫反射效果，也称为Lambert反射。因为这些表面各个方向等强度的反射光，所以各个视角物体表面呈现出相同的亮度。对于给定的表面，该表面亮度仅依赖该表面到光源的方向<span class="math inline">\(L\)</span>和表面的法向量<span class="math inline">\(N\)</span>的夹角。如图1所示：</p>
+<figure>
+<img src="p1.png" alt="图1光源方向与物体法向量N之间的夹角\theta"><figcaption aria-hidden="true">图1光源方向与物体法向量<span class="math inline">\(N\)</span>之间的夹角<span class="math inline">\(\theta\)</span></figcaption>
+</figure>
+<p>当光源照射到物体表面上时将发生漫反射。其值与观察方向无关，因而从各个视角物体表面呈现出相同的亮度。这样的物体表面称为理想漫反射体，也称为Lambert反射体。Lambert余弦定理表明：对于给定的表面，该表面的亮度仅依赖于该表面到光源方向<span class="math inline">\(L\)</span>与物体表面法向量<span class="math inline">\(N\)</span>的夹角。在与物体表面法向量夹角为<span class="math inline">\(\theta\)</span>的方向上，每一个面积为<span class="math inline">\(dA\)</span>的平面单位所散发出来的光线与<span class="math inline">\(\cos\theta\)</span>成正，比对于Lambert反射，光强度在所有的观察方向上都相同。其光照方程为： <span class="math display">\[
+I_{diff}=k_dI_l\cos\theta
+\]</span> 其中参数<span class="math inline">\(I_l\)</span>表示光源的强度，参数<span class="math inline">\(k_d\)</span>是漫反射系数，仅当入射角度在0度到90度之间时（<span class="math inline">\(\cos\theta\)</span>在0到1之间），点光源才照亮片面；若<span class="math inline">\(\cos\theta\)</span>为负值时，则光源位于面片之后，可以设max(<span class="math inline">\(\cos\theta\)</span>，0)设置从表面的后面照不到该表面。若<span class="math inline">\(N\)</span>为物体表面的单位法向量，且<span class="math inline">\(L\)</span>为从表面上一点指向点光源的单位矢量，则<span class="math inline">\(\cos\theta=N\cdot L\)</span>，则对于单个点光源的漫反射方程可以改写为： <span class="math display">\[
+I_{diff}=k_dI_l(N\cdot L)
+\]</span> 可以在这基础上加入环境光来产生更真实的光照方程： <span class="math display">\[
+I=k_aI_a+k_dI_l(N\cdot L)
+\]</span></p>
+<h4 id="镜面反射和phong模型">镜面反射和Phong模型</h4>
+<p>当观察一个光照下的光滑物体表面如磨光的金属或者苹果的时候，可能在某个观察方向上看到高光或者强光，这个现象称为镜面反射。因为在接近镜面反射角的一个会聚区域内入射光的全部或大部分成为反射光。如图2所示：</p>
+<figure>
+<img src="p2.png" alt="图2镜面反射"><figcaption aria-hidden="true">图2镜面反射</figcaption>
+</figure>
+<p>在光照物体某点处的镜面反射方向，镜面反射角等于入射角，它们位于表面的单位法向量两侧，在图中用<span class="math inline">\(R\)</span>表示一个理想镜面反射方向的单位矢量，<span class="math inline">\(L\)</span>表示指向点光源的单位矢量，<span class="math inline">\(V\)</span>为指向视点的单位矢量，角度<span class="math inline">\(\varphi\)</span>是观察方向与镜面反射方向<span class="math inline">\(R\)</span>之间的夹角。对于一个理想的反射体，入射光仅在镜面反射方向上有反射现象。此时仅当<span class="math inline">\(V\)</span>与<span class="math inline">\(R\)</span>重合时才能观察到反射光线（即<span class="math inline">\(\varphi=0\)</span>）。</p>
+<p>非理想反射体的镜面反射方向分布在<span class="math inline">\(R\)</span>周围有限的范围。较光滑的表面的镜面反射范围较小，而粗糙的物体则有较大的反射范围。Phong曾提出一个计算镜面反射范围的经验公式，称为Phong镜面反射模型。他认为镜面反射光强与<span class="math inline">\(\cos\varphi\)</span>成正比，<span class="math inline">\(\varphi\)</span>的值介于0度到90度之间。镜面反射的光强度主要与物体表面材质属性，光线入射角，以及一些其他因素有关。通过镜面反射函数<span class="math inline">\(W(\theta)\)</span>来为每一个表面近似表示黑白镜面反射光强度的变化，通过镜面反射系数<span class="math inline">\(W(\theta)\)</span>可以将Phong镜面反射模型表示为： <span class="math display">\[
+I_{spec}=W(\theta)I_l\cos^{n_s}\varphi
+\]</span> 其中，<span class="math inline">\(I_l\)</span>为光源强度，<span class="math inline">\(\varphi\)</span>为观察方向<span class="math inline">\(V\)</span>与镜面反射方向<span class="math inline">\(R\)</span>夹角。除此之外我们注意到有一个指数<span class="math inline">\(n_s\)</span>，该指数用来加快函数的衰减程度，由于在物理世界中高光存在于物体表面很小的一部分，而<span class="math inline">\(\cos\varphi\)</span>的衰减速度太慢，通过携带指数，可以促进衰减，使得高光只能在非常接近的情况下才能被视角看见。</p>
+<figure>
+<img src="p3.png" alt="图3指数n_s加速衰减光照，避免过亮"><figcaption aria-hidden="true">图3指数<span class="math inline">\(n_s加速衰减光照，避免过亮\)</span></figcaption>
+</figure>
+<p>由于<span class="math inline">\(V\)</span>与<span class="math inline">\(R\)</span>是观察方向和镜面反射方向的单位矢量，可以用点积<span class="math inline">\(V\cdot R\)</span>来计算<span class="math inline">\(\cos\varphi\)</span>的值，假定镜面反射系数是一个常数，可以用以下公式来计算物体表面上某点处的镜面反射。 <span class="math display">\[
+I_{spec}=k_sI_l(V\cdot R)^{n_s}
+\]</span></p>
+<h4 id="blinn-phong反射模型">Blinn-Phong反射模型</h4>
+<p>由于在计算机中计算反射向量<span class="math inline">\(R\)</span>的计算量非常大。所以Blinn-Phong光照模型提出使用另一种计算方法：半角矢量。通过上面图2可以看出，物体表面的法向量<span class="math inline">\(N\)</span>正好是光源方向<span class="math inline">\(L\)</span>和镜面反射<span class="math inline">\(R\)</span>的角平分线。</p>
+<p>同样，我们知道视点方向<span class="math inline">\(V\)</span>和光源<span class="math inline">\(L\)</span>，很容易可以计算出它们的角平分线<span class="math inline">\(H\)</span>，<span class="math inline">\(H\)</span>就称为半角矢量。如图4所示：</p>
+<figure>
+<img src="p4.png" alt="图4半角矢量H与矢量L,V的角平分线方向一致"><figcaption aria-hidden="true">图4半角矢量<span class="math inline">\(H\)</span>与矢量<span class="math inline">\(L\)</span>,<span class="math inline">\(V\)</span>的角平分线方向一致</figcaption>
+</figure>
+<p>半角矢量可以从以下公式得到： <span class="math display">\[
+H=\frac{L+V}{|L|+|V|}
+\]</span> Blinn-Phong公式如下 <span class="math display">\[
+I_{spec}=k_sI_l(N\cdot H)^{n_s}
+\]</span></p>
+<h4 id="phong模型和blinn-phong模型的比较">Phong模型和Blinn-Phong模型的比较</h4>
+<p>Phong模型和Blinn-Phong模型的本质区别在于高光项的计算，Phong需要计算反射向量<span class="math inline">\(R\)</span></p>
+<figure>
+<img src="p5.png" alt="图5通过向表面法向量N方向投影来计算矢量R"><figcaption aria-hidden="true">图5通过向表面法向量<span class="math inline">\(N\)</span>方向投影来计算矢量<span class="math inline">\(R\)</span></figcaption>
+</figure>
+<p>由图5可知，我们可以通过点积<span class="math inline">\(N\cdot L\)</span>得到矢量<span class="math inline">\(L\)</span>在法向量<span class="math inline">\(N\)</span>上的投影，根据平行四边形法则我们得到： <span class="math display">\[
+R+L=2(N\cdot L)N
+\]</span> 因此得出反射向量<span class="math inline">\(R\)</span>为： <span class="math display">\[
+R=-L+2(N\cdot L)N
+\]</span> 而计算Blinn-Phong模型中的半角矢量<span class="math inline">\(H\)</span>则简单得多，只需要将向量<span class="math inline">\(L\)</span>和向量<span class="math inline">\(V\)</span>相加，再进行规范化即可。因此再计算量上，Blinn-Phong模型是比Phong模型要小的。</p>
+<p>但是Phong模型更贴近真实的高光的产生方式，而Blinn-Phong是一种理想化的经验模型。</p>
+<p>#### 距离衰减算法</p>
+<p>基本光照模型由几个光照分量综合而成：环境反射，漫反射和镜面反射。在真实世界中，光照强度随着物体里光源距离渐远而减弱，这种影响称为衰减作用。除了平行光强度会被假定一样之外，点光源和聚光灯都考虑光照强度随着物体表面离光源距离变远而减少。在真实世界里，来自一个点光的光照强度以<span class="math inline">\(1/d^2\)</span>衰减。考虑到寄存器组合器中的数据不能大于1和光线的衰减程度也不可能超过100%，将光照强度的计算结果的取值范围控制在0到1之间。如式所示： <span class="math display">\[
+  Intensity=1-d^2/R^2
+  \]</span> 其中<span class="math inline">\(d\)</span>是点到光源的距离，<span class="math inline">\(R\)</span>是控制衰减量的常量。但是对于Phong光照模型采用上式实现的光照效果不太明显。考虑到可控性，在此采用三个衰减因子来满足人们对光照真实感的追求，如式所示： <span class="math display">\[
+  Intensity=1/(K_C+K_Ld+K_Qd^2)
+  \]</span> 其中<span class="math inline">\(d\)</span>是点到光源的距离，<span class="math inline">\(K_C\)</span>，<span class="math inline">\(K_L\)</span>，<span class="math inline">\(K_Q\)</span>是衰减的常量，线性和二次衰减因子（平行光的衰减因子是1，即<span class="math inline">\(K_C=1\)</span>，<span class="math inline">\(K_L=0\)</span>，<span class="math inline">\(K_Q=0\)</span>）。这三个衰减参数可以使对场景光照的外表获得想要的控制效果。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webgl/" rel="tag"># webgl</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/06/git-use-summary/" rel="next" title="git使用小结">
+                <i class="fa fa-chevron-left"></i> git使用小结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">tzhxh</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tzhxh</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

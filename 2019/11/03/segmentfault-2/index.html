@@ -302,14 +302,7 @@
       
         <p>在使用封装的ajax进行与后台数据传输时发现的一个问题</p>
 <a id="more"></a>
-<p>第一次post总是会被挂起，status状态为cancel。只有再发送才能成功。<br>经过在网上查找资料并通过实验得出结论</p>
-<ol>
-<li>方法在a标签内触发会导致该问题发生</li>
-<li>方法在from表单内使用button标签触发 不写明type属性，会导致失败，猜测可能是不写明type属性就默认为submit。</li>
-<li>方法在form内使用button标签触发 type属性为button 成功</li>
-<li>方法在form外使用button标签触发 不写明type属性 成功</li>
-<li>方法在form外使用button标签触发 type属性为button 成功</li>
-</ol>
+<p>第一次post总是会被挂起，status状态为cancel。只有再发送才能成功。 经过在网上查找资料并通过实验得出结论 1. 方法在a标签内触发会导致该问题发生 2. 方法在from表单内使用button标签触发 不写明type属性，会导致失败，猜测可能是不写明type属性就默认为submit。 3. 方法在form内使用button标签触发 type属性为button 成功 4. 方法在form外使用button标签触发 不写明type属性 成功 5. 方法在form外使用button标签触发 type属性为button 成功</p>
 <p>因此猜测可能是在form表单内使用submit，会导致表单提交。 因此和ajax产生冲突，导致ajax被中断。</p>
 
       
@@ -425,7 +418,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -438,7 +431,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

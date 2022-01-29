@@ -302,19 +302,19 @@
       
         <p>对开发中遇到的问题进行一些总结，记录关于封装的一些要点</p>
 <a id="more"></a>
-<p>将要封装的内容写到一个 <code>.js</code> 文件中,在需要用到的HTML页面中用<br> <code>script</code>标签引入就可使用，</p>
-<p>首先创建一个静态类，可以不需要实例化直接使用<br><code></code></p>
-<pre><code>var common = function () {};
-</code></pre><p><br>然后为这个类添加属性<br><code></code></p>
+<p>将要封装的内容写到一个 <code>.js</code> 文件中,在需要用到的HTML页面中用 <code>script</code>标签引入就可使用，</p>
+<p>首先创建一个静态类，可以不需要实例化直接使用 <code></code></p>
+<pre><code>var common = function () {};</code></pre>
+<p> 然后为这个类添加属性 <code></code></p>
 <pre><code>common.xxx = undefined/null/boolean/number/string   //五种基本数据类型
-common.xxx = {}                                     //object 引用数据类型
-</code></pre><p><br>此处封装了ajax ， 使用的是原生ajax。完整代码如下；<br><code></code></p>
-<pre><code>var common = function () {};
-</code></pre><p>common.service = {<br>    post: function (url, data, callback) {<br>        let request = new XMLHttpRequest();<br>        request.open(“post”, url, true);<br>        request.setRequestHeader(“Content-type”, “application/json;charset=utf-8”);<br>        request.send(JSON.stringify(data));<br>        request.onreadystatechange = function () {<br>            if (request.readyState == 4) {<br>                if (request.status == 200) {<br>                    callback(request.responseText);<br>                }<br>            }<br>        };<br>    },<br>    get: function (url, data, callback) {<br>        let request = new XMLHttpRequest();<br>        request.open(“get”, url, true);<br>        request.setRequestHeader(“Content-type”, “application/json;charset=utf-8”);<br>        request.send(JSON.stringify(data));<br>        request.onreadystatechange = function () {<br>            if (request.readyState == 4) {<br>                if (request.status == 200) {<br>                    callback(request.responseText);<br>                }<br>            }<br>        };<br>    },<br>};</p>
-<p><br>一共三个参数 url为路径 ， data为要发送的json数据 ，callback 为回调函数 以返回的数据作为实参<br>在调用时可以按如下方法使用<br><code></code></p>
-<p>common.service.post(url,data,function (data) {                //todo url填入路径类型为string当前为登录路径 ,data 为一个对象{key:value,key:value}</p>
-<pre><code>})
-</code></pre><p></p>
+common.xxx = {}                                     //object 引用数据类型</code></pre>
+<p> 此处封装了ajax ， 使用的是原生ajax。完整代码如下； <code></code></p>
+<pre><code>var common = function () {};</code></pre>
+<p>common.service = { post: function (url, data, callback) { let request = new XMLHttpRequest(); request.open("post", url, true); request.setRequestHeader("Content-type", "application/json;charset=utf-8"); request.send(JSON.stringify(data)); request.onreadystatechange = function () { if (request.readyState == 4) { if (request.status == 200) { callback(request.responseText); } } }; }, get: function (url, data, callback) { let request = new XMLHttpRequest(); request.open("get", url, true); request.setRequestHeader("Content-type", "application/json;charset=utf-8"); request.send(JSON.stringify(data)); request.onreadystatechange = function () { if (request.readyState == 4) { if (request.status == 200) { callback(request.responseText); } } }; }, };</p>
+<p> 一共三个参数 url为路径 ， data为要发送的json数据 ，callback 为回调函数 以返回的数据作为实参 在调用时可以按如下方法使用 <code></code></p>
+<p>common.service.post(url,data,function (data) { //todo url填入路径类型为string当前为登录路径 ,data 为一个对象{key:value,key:value}</p>
+<pre><code>        })</code></pre>
+<p></p>
 
       
     </div>
@@ -429,7 +429,7 @@ common.xxx = {}                                     //object 引用数据类型
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -442,7 +442,7 @@ common.xxx = {}                                     //object 引用数据类型
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

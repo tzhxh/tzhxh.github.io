@@ -302,15 +302,15 @@
       
         <p>在项目中使用了layer的弹出层插件，记录一下基础的使用方法</p>
 <a id="more"></a>
-<p>首先将下载的layer整个文件夹放到项目中<br>在需要用到的页面先引入jQuery.js 再引入layer的.js文件就可以使用 </p>
-<p>以下是代码<br><code></code></p>
-<p>layer.open(<br>            {<br>                type: 2,            //type为1的时候 在content为内容可以是HTML页面标签 为2的时候为连接  no表示无滚动条<br>                title: “登录”,<br>                area: [‘600px’, ‘466px’],        //所占大小 可以是百分比<br>                shade: 0.3,                      //阴影<br>                anim: 2,                         //出现的动画<br>                maxmin: false, //全屏最小化<br>                shadeClose: true, //开启遮罩关闭<br>                content: [“login.html”, ‘no’]<br>            }<br>        );</p>
+<p>首先将下载的layer整个文件夹放到项目中 在需要用到的页面先引入jQuery.js 再引入layer的.js文件就可以使用</p>
+<p>以下是代码 <code></code></p>
+<p>layer.open( { type: 2, //type为1的时候 在content为内容可以是HTML页面标签 为2的时候为连接 no表示无滚动条 title: "登录", area: ['600px', '466px'], //所占大小 可以是百分比 shade: 0.3, //阴影 anim: 2, //出现的动画 maxmin: false, //全屏最小化 shadeClose: true, //开启遮罩关闭 content: ["login.html", 'no'] } );</p>
 <p></p>
-<p>打开的子层关闭自身<br><code></code></p>
-<p> var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引<br>                parent.layer.close(index); //再执行关闭</p>
+<p>打开的子层关闭自身 <code></code></p>
+<p>var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引 parent.layer.close(index); //再执行关闭</p>
 <p></p>
-<p>打开的子层操作父层的内容<br><code></code></p>
-<p>parent.$(“#noLogin”);</p>
+<p>打开的子层操作父层的内容 <code></code></p>
+<p>parent.$("#noLogin");</p>
 <p></p>
 
       
@@ -426,7 +426,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -439,7 +439,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

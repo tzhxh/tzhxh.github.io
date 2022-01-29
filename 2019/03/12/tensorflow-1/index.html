@@ -312,20 +312,29 @@
       
 
       
-        <p>Win10下用Anaconda安装TensorFlow<br><a id="more"></a></p>
-<font size="4">1.安装Anaconda</font><br>选择相应的<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">Anaconda</a>进行安装,根据自己系统选择版本，我选的是Python 3.7 version 64-Bit<br><img src="xiazaijiemian.png" alt><br>和普通软件安装一样，选择全部默认即可，注意勾选将    python3.7添加进环境变量<br><img src="tianjiabianliang.png" alt><br>安装好Anaconda之后通过以下命令来查看Anaconda已经安装哪些包。<br>运行<font style="color: red">开始菜单-Anaconda3-Anaconda Prompt</font><br><code>conda list<br></code><br>可以看到已经安装了 numpy,sympy等常用包。<br><br><font size="4">2.安装Tensorflow</font><br>TensorFlow目前在Windows下只支持Python3.5版本。<br><br>（1）打开Anaconda Prompt，输入清华仓库镜像，这样更新会快一些：<br><img src="minglingtai.png" alt><br><code>conda config –add channels <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</a><br>    conda config –set show_channel_urls yes<br></code><br><br>(2)同样在Anaconda Prompt中利用Anaconda创建一个python3.5的环境，环境名称为tensorflow ，输入下面命令：<br><code>conda create -n tensorflow python=3.5<br></code><br>运行<font style="color: red">开始菜单-&gt;Anaconda3—&gt;Anaconda Navigator</font>，点击左侧的<font style="color: red">Environments</font> ，可以看到<font style="color: red">tensorflow</font>的环境已经创建好了。<br><img src="navigatorshezhi.png" alt><br><br>(3)在anaconda prompt中启动tenso环境<br><code>activate tensorflow<br></code><br><img src="activate.png" alt><br><br><font style=";color: red">当不使用TensorFlow环境时 用deactivate命令关闭环境</font>
-
-<p>(4)安装CPU版本的TensorFlow<br><code>pip install –upgrade –ignore-installed tensorflow<br></code><br>这样TensorFlow就安装好了</p>
-<p>(5)测试TensorFlow<br>在Anaconda Prompt中启动tensorflow环境，并进入python环境。<br>！<a href="test1.png"></a><br><img src="test2.png" alt></p>
-<p><font size="4">3.其他问题</font><br>或许到这里我们并没有满足，我们在Anaconda自带的ipython 和Spyder中import tensorflow的时候一直失败，提示 <font style="color: red">No module named ‘tensorflow’</font> ，如下图，那是因为我们没有在tensorflow的环境下打开它们。<br><img src="cuowutishi.png" alt></p>
+        <p>Win10下用Anaconda安装TensorFlow <a id="more"></a></p>
+<p><font size="4">1.安装Anaconda</font> 选择相应的<a href="https://www.anaconda.com/distribution/" target="_blank" rel="noopener">Anaconda</a>进行安装,根据自己系统选择版本，我选的是Python 3.7 version 64-Bit <img src="xiazaijiemian.png"> 和普通软件安装一样，选择全部默认即可，注意勾选将 python3.7添加进环境变量 <img src="tianjiabianliang.png"> 安装好Anaconda之后通过以下命令来查看Anaconda已经安装哪些包。 运行<font style="color: red">开始菜单-Anaconda3-Anaconda Prompt</font> <code>conda list </code> 可以看到已经安装了 numpy,sympy等常用包。</p>
+<p><font size="4">2.安装Tensorflow</font> TensorFlow目前在Windows下只支持Python3.5版本。</p>
+<p>（1）打开Anaconda Prompt，输入清华仓库镜像，这样更新会快一些： <img src="minglingtai.png"> <code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/ conda config --set show_channel_urls yes<br>
+</code></p>
+<p>(2)同样在Anaconda Prompt中利用Anaconda创建一个python3.5的环境，环境名称为tensorflow ，输入下面命令： <code>conda create -n tensorflow python=3.5 </code> 运行<font style="color: red">开始菜单-&gt;Anaconda3—&gt;Anaconda Navigator</font>，点击左侧的<font style="color: red">Environments</font> ，可以看到<font style="color: red">tensorflow</font>的环境已经创建好了。 <img src="navigatorshezhi.png"></p>
+<p>(3)在anaconda prompt中启动tenso环境 <code>activate tensorflow </code> <img src="activate.png"></p>
+<p><font style=";color: red">当不使用TensorFlow环境时 用deactivate命令关闭环境</font></p>
+<p>(4)安装CPU版本的TensorFlow <code>pip install --upgrade --ignore-installed tensorflow </code> 这样TensorFlow就安装好了</p>
+<p>(5)测试TensorFlow 在Anaconda Prompt中启动tensorflow环境，并进入python环境。 ！<a href="test1.png"></a> <img src="test2.png"></p>
+<p><font size="4">3.其他问题</font> 或许到这里我们并没有满足，我们在Anaconda自带的ipython 和Spyder中import tensorflow的时候一直失败，提示 <font style="color: red">No module named ‘tensorflow’</font> ，如下图，那是因为我们没有在tensorflow的环境下打开它们。 <img src="cuowutishi.png"></p>
 <p>为了能在ipython 和Spyder中使用tensorflow，我们需要在tensorflow的环境中安装这两个的插件。</p>
-<p>打开<font style="color: red"> Anaconda Navigator</font>，选择<font style="color: red">Not installed</font>，找到 ipython和Spyder并安装，笔者这里已经安装好，所以在这个页面没有显示。<br><img src="noinstall.png" alt></p>
+<p>打开<font style="color: red"> Anaconda Navigator</font>，选择<font style="color: red">Not installed</font>，找到 ipython和Spyder并安装，笔者这里已经安装好，所以在这个页面没有显示。 <img src="noinstall.png"></p>
 <p>安装好插件后，我们需要测试一下。</p>
-<p>在Anaconda Prompt中启动tensorflow环境，并运行ipython，import tensorflow发现成功: </p>
-<p><img src="test3.png" alt="ipython"></p>
+<p>在Anaconda Prompt中启动tensorflow环境，并运行ipython，import tensorflow发现成功:</p>
+<figure>
+<img src="test3.png" alt="ipython"><figcaption aria-hidden="true">ipython</figcaption>
+</figure>
 <p>同样，在Anaconda Prompt中启动tensorflow环境，并运行Spyder，等一会儿后会启动Spyder IDE，import tensorflow 同样成功:</p>
-<p><img src="Spyder.png" alt="spyder"></p>
-<p>一定要运行 Spyder(tensorflow)<br><img src="spydertensorflow.png" alt></p>
+<figure>
+<img src="Spyder.png" alt="spyder"><figcaption aria-hidden="true">spyder</figcaption>
+</figure>
+<p>一定要运行 Spyder(tensorflow) <img src="spydertensorflow.png"></p>
 
       
     </div>
@@ -436,7 +445,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -449,7 +458,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

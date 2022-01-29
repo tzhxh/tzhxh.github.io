@@ -302,16 +302,78 @@
       
         <p>ActivityLifecycleCallbacks是Application里的一个接口，在Android4.0（API level 14）中新加。用于监听应用中所有Activity的生命周期的调用情况，callback中的方法会在Activity回调方法之前调用，可以通过实现这个接口来完成一些特殊需求，比如检测APP是否处于前台。</p>
 <a id="more"></a>
-<h4>使用方法</h4><br>先新建一个类，我将其命名为App，继承Application并在manifest的application标签中进行注册<br><br><code><br><br>import android.app.Application;<br><br><br>public class App extends Application {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>    }<br>}<br><br></code><br><br>然后再创建一个类，我将其命名为MyActivityLifecycleCallback，实现Application.ActivityLifecycleCallbacks接口<br><br><code><br><br>import android.app.Activity;<br>import android.app.Application;<br>import android.os.Bundle;<br><br>import androidx.annotation.NonNull;<br>import androidx.annotation.Nullable;<br><br>public class MyActivityLifecycleCallback implements Application.ActivityLifecycleCallbacks {<br><br><br>    @Override<br>    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {<br><br>    }<br><br>    @Override<br>    public void onActivityStarted(@NonNull Activity activity) {<br><br>    }<br><br>    @Override<br>    public void onActivityResumed(@NonNull Activity activity) {<br><br>    }<br><br>    @Override<br>    public void onActivityPaused(@NonNull Activity activity) {<br><br>    }<br><br>    @Override<br>    public void onActivityStopped(@NonNull Activity activity) {<br><br>    }<br><br>    @Override<br>    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {<br><br>    }<br><br>    @Override<br>    public void onActivityDestroyed(@NonNull Activity activity) {<br><br>    }<br>}<br><br><br></code><br><br>然后在创建的App类中进行注册<br><code><br><br>public class App extends Application {<br><br>    @Override<br>    public void onCreate() {<br>        super.onCreate();<br>        registerActivityLifecycleCallbacks(new MyActivityLifecycleCallback());<br>    }<br>}<br><br></code><br><br>这样就完成了最简单的使用，因为什么功能都没有实现。。。。<br><br><h4>应用</h4>
+<h4>
+使用方法
+</h4>
+<p>先新建一个类，我将其命名为App，继承Application并在manifest的application标签中进行注册</p>
+<p><code></code></p>
+<p>import android.app.Application;</p>
+<p>public class App extends Application {</p>
+<pre><code>@Override
+public void onCreate() {
+    super.onCreate();
+}</code></pre>
+<p>}</p>
+<p></p>
+<p>然后再创建一个类，我将其命名为MyActivityLifecycleCallback，实现Application.ActivityLifecycleCallbacks接口</p>
+<p><code></code></p>
+<p>import android.app.Activity; import android.app.Application; import android.os.Bundle;</p>
+<p>import androidx.annotation.NonNull; import androidx.annotation.Nullable;</p>
+<p>public class MyActivityLifecycleCallback implements Application.ActivityLifecycleCallbacks {</p>
+<pre><code>@Override
+public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
 
+}
+
+@Override
+public void onActivityStarted(@NonNull Activity activity) {
+
+}
+
+@Override
+public void onActivityResumed(@NonNull Activity activity) {
+
+}
+
+@Override
+public void onActivityPaused(@NonNull Activity activity) {
+
+}
+
+@Override
+public void onActivityStopped(@NonNull Activity activity) {
+
+}
+
+@Override
+public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+}
+
+@Override
+public void onActivityDestroyed(@NonNull Activity activity) {
+
+}</code></pre>
+<p>}</p>
+<p></p>
+<p>然后在创建的App类中进行注册 <code></code></p>
+<p>public class App extends Application {</p>
+<pre><code>@Override
+public void onCreate() {
+    super.onCreate();
+    registerActivityLifecycleCallbacks(new MyActivityLifecycleCallback());
+}</code></pre>
+<p>}</p>
+<p></p>
+<p>这样就完成了最简单的使用，因为什么功能都没有实现。。。。</p>
+<h4>
+应用
+</h4>
 <p>ActivityLifecycleCallbacks可以对Activity的生命周期进行集中管理，因此具有Activity的所有生命周期，对应的监听的生命周期方法会在Activity中的生命方法调用父类的方法之后被触发。因此可以在这里实现如下的功能：</p>
-<ol>
-<li><p>限制指定的Activity的数量</p>
-</li>
-<li><p>控制在特定情况下只会有一个Activity被打开</p>
-</li>
-<li><p>判断App前后台状态</p>
-</li>
+<ol type="1">
+<li><p>限制指定的Activity的数量</p></li>
+<li><p>控制在特定情况下只会有一个Activity被打开</p></li>
+<li><p>判断App前后台状态</p></li>
 </ol>
 
       
@@ -425,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -438,7 +500,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
