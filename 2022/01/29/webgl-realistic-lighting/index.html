@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="webgl,">
+  <meta name="keywords" content="2022,webgl,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="真实感光照模型 webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真">
-<meta name="keywords" content="webgl">
+<meta name="keywords" content="2022,webgl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="真实感光照模型">
 <meta property="og:url" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/index.html">
@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p3.png">
 <meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p4.png">
 <meta property="og:image" content="http://yoursite.com/2022/01/29/webgl-realistic-lighting/p5.png">
-<meta property="og:updated_time" content="2022-01-29T03:56:34.114Z">
+<meta property="og:updated_time" content="2022-01-29T09:26:54.780Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="真实感光照模型">
 <meta name="twitter:description" content="真实感光照模型 webgl真实感光照模型分为两种：全局光照模型和局部光照模型。局部光照模型是较为简单的光照模型，只对物体进行直接光照计算，不考虑其他的间接影响。全局光照模型是基于光学物理原理的，光照强度的计算依赖于光能在现实世界中的传播情况，考虑光线与整个场景中各物体表面见的相互影响，包括多次反射、投射、散射等。因此，与局部光照模型相比，全局光照模型需要相当大的计算量，但同时也能取得非常逼真的真">
@@ -388,6 +388,8 @@ R=-L+2(N\cdot L)N
       
         <div class="post-tags">
           
+            <a href="/tags/2022/" rel="tag"># 2022</a>
+          
             <a href="/tags/webgl/" rel="tag"># webgl</a>
           
         </div>
@@ -410,6 +412,10 @@ R=-L+2(N\cdot L)N
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/01/29/hexo-mathjax/" rel="prev" title="hexo渲染公式的配置">
+                hexo渲染公式的配置 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -477,7 +483,7 @@ R=-L+2(N\cdot L)N
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -490,7 +496,7 @@ R=-L+2(N\cdot L)N
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -703,6 +709,28 @@ R=-L+2(N\cdot L)N
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
