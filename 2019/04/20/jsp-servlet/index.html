@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet/mulv.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet/login.png">
-<meta property="og:updated_time" content="2021-02-28T02:58:08.212Z">
+<meta property="og:updated_time" content="2022-03-18T09:18:51.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsp+servlet实现简单的登录跳转功能">
 <meta name="twitter:description" content="用jsp和servlet实现一个简单的登录跳转功能的页面">
@@ -307,7 +307,12 @@
 <h3>
 主要流程
 </h3>
-1.首先在Tomcat的webapps文件夹下创建一个新的文件夹，并将jsp文件存放在该目录下 这里我将文件夹命名为login 2.在login文件夹下再新建一个名为WEB-INF的文件夹，用来存放命名为web.xml 的配置文件， 3.在WEN-INF文件下再新建一个名为classes的文件夹，用来存放servlet文件 <strong style="font-weight: bold;">(若servlet文件有包，则文件结构为classes - 包名(文件夹) - servlet文件名.class)</strong> 4.将编写好的 .java编译为.class 文件后放入指定目录，并修改配置文件
+<ol type="1">
+<li><p>首先在Tomcat的webapps文件夹下创建一个新的文件夹，并将jsp文件存放在该目录下 这里我将文件夹命名为login</p></li>
+<li><p>在login文件夹下再新建一个名为WEB-INF的文件夹，用来存放命名为web.xml 的配置文件，</p></li>
+<li><p>在WEN-INF文件下再新建一个名为classes的文件夹，用来存放servlet文件 <strong style="font-weight: bold;">(若servlet文件有包，则文件结构为classes - 包名(文件夹) - servlet文件名.class)</strong></p></li>
+<li><p>将编写好的 .java编译为.class 文件后放入指定目录，并修改配置文件</p></li>
+</ol>
 <h5>
 目录结构为：
 </h5>

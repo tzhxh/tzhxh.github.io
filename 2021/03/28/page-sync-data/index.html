@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="在安卓开发当中，我们很经常会遇到多个页面需要同步数据的情况，可能是不同activity之间需要同步，也可能是fragment之间需要同步，这次处理的是activity之间同步数据的问题，由于开发语言是使用的kotlin,所以使用的是kotlin协程 + viewModel + liveData">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-28T02:48:21.266Z">
+<meta property="og:updated_time" content="2022-03-18T09:16:04.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安卓不同页面间同步数据">
 <meta name="twitter:description" content="在安卓开发当中，我们很经常会遇到多个页面需要同步数据的情况，可能是不同activity之间需要同步，也可能是fragment之间需要同步，这次处理的是activity之间同步数据的问题，由于开发语言是使用的kotlin,所以使用的是kotlin协程 + viewModel + liveData">
@@ -304,15 +304,20 @@
 <a id="more"></a>
 <p>由于是刚接触kotlin,使用就尽量记录的详细一点吧。。。以后发现这里存在理解错误的，记得回来修改一下。。。</p>
 <h2 id="先说一下本文的目录吧">先说一下本文的目录吧</h2>
-<p>1 <em><a href="chapter1">介绍一下用到的东西</a></em> 2 <em><a href="chapter2">分析一下思路</a></em> 3 <em><a href="chapter3">贴一下代码</a></em> 4 <em><a href="chapter4">还有其他的东西</a></em></p>
+<ol type="1">
+<li><p><em><a href="chapter1">介绍一下用到的东西</a></em></p></li>
+<li><p><em><a href="chapter2">分析一下思路</a></em></p></li>
+<li><p><em><a href="chapter3">贴一下代码</a></em></p></li>
+<li><p><em><a href="chapter4">还有其他的东西</a></em></p></li>
+</ol>
 <h3 id="chapter1">
 介绍一下用到的东西
 </h3>
 <ul>
-<li><em><a href="#chapter1_section1">kotlin协程</a></em></li>
-<li><em><a href="#chapter1_section2">jetpack</a></em></li>
-<li><em><a href="#chapter1_section3">viewModel</a></em></li>
-<li><em><a href="#chapter1_section4">liveData</a></em></li>
+<li><p><em><a href="#chapter1_section1">kotlin协程</a></em></p></li>
+<li><p><em><a href="#chapter1_section2">jetpack</a></em></p></li>
+<li><p><em><a href="#chapter1_section3">viewModel</a></em></p></li>
+<li><p><em><a href="#chapter1_section4">liveData</a></em></p></li>
 </ul>
 <p><strong id="chapter1_section1">kotlin协程</strong> <em>kotlinx.coroutines</em>是由JetBrains开发的功能丰富的协程库，它包含很多高级协程的原语，包括<em>launch</em>，<em>async</em>等</p>
 <p>在android上的kotlin协程，协程是一种并发设计模式，可以Android平台上使用来简化异步执行的代码， 在Android上，协程有助于管理长时间运行的任务，但如果管理不当，这些任务可能会阻塞主线程并导致应用无响应，协程具有一下特点</p>
@@ -339,23 +344,42 @@
 <p>ViewModel 类旨在以注重生命周期的方式存储和管理界面相关的数据。ViewModel 类让数据可在发生屏幕旋转等配置更改后继续留存。</p>
 </blockquote>
 <p>在使用过程中，我一般是将activity中关于数据的操作抽离到viewModel中，viewModel是具有生命周期的，viewModel对象存在的时间范围是获取ViewModel时传递给ViewModelProvider的Lifecycle.要注意viewModeel里不要持有activity,fragment等的引用，不然可能导致内存泄漏。</p>
-<p>但在 <a href="https://developer.android.google.cn/topic/libraries/architecture/viewmodel?hl=zh-cn" target="_blank" rel="noopener">android开发者</a>里的写法是： - activity： <strong>val model: MyViewModel by viewModels()</strong> 记得在build.gradle添加依赖<strong>activity-ktx</strong> - fragment： <strong>val model: MyViewModel by activityViewModels()</strong>，在build.gradle添加<strong>fragment-ktx</strong> 这两个创建方法我不是很清楚，需要再研究一下。</p>
+<p>但在 <a href="https://developer.android.google.cn/topic/libraries/architecture/viewmodel?hl=zh-cn" target="_blank" rel="noopener">android开发者</a>里的写法是：</p>
+<ul>
+<li><p>activity： <strong>val model: MyViewModel by viewModels()</strong> 记得在build.gradle添加依赖<strong>activity-ktx</strong></p></li>
+<li><p>fragment： <strong>val model: MyViewModel by activityViewModels()</strong>，在build.gradle添加<strong>fragment-ktx</strong> 这两个创建方法我不是很清楚，需要再研究一下。</p></li>
+</ul>
 <p>关于ViewModel,还是去查看<a href="https://developer.android.google.cn/topic/libraries/architecture/viewmodel?hl=zh-cn" target="_blank" rel="noopener">安卓开发者-ViewModel</a></p>
 <p><strong id="chapter1_section4">liveData</strong></p>
 <blockquote>
 <p>LiveData 是一种可观察的数据存储器类。与常规的可观察类不同，LiveData 具有生命周期感知能力，意指它遵循其他应用组件（如 Activity、Fragment 或 Service）的生命周期。这种感知能力可确保 LiveData 仅更新处于活跃生命周期状态的应用组件观察者。</p>
 </blockquote>
 <p>根据我的使用情况，我觉得是多个组件使用同一个liveData对象时，当liveData对象的的值发生改变，多个组件都会更新，其实这个总结很浅显，也不全面。但我用到的功能目前 就是这个，依靠liveData来实现同步。</p>
-<p>liveData除了这个之外还有许多用途，但我还没用到。。。所以也不知道。也有许多有点，例如： - 确保界面符合数据状态 - 不会发生内存泄漏 - 不会因 Activity 停止而导致崩溃 - 不再需要手动处理生命周期 - 数据始终保持最新状态 - 适当的配置更改 - 共享资源</p>
+<p>liveData除了这个之外还有许多用途，但我还没用到。。。所以也不知道。也有许多有点，例如：</p>
+<ul>
+<li><p>确保界面符合数据状态</p></li>
+<li><p>不会发生内存泄漏</p></li>
+<li><p>不会因 Activity 停止而导致崩溃</p></li>
+<li><p>不再需要手动处理生命周期</p></li>
+<li><p>数据始终保持最新状态</p></li>
+<li><p>适当的配置更改</p></li>
+<li><p>共享资源</p></li>
+</ul>
 <p>通常liveData会配合ViewModel一起使用，并且都能自动的处理生命周期。 具体的使用还是看<a href="https://developer.android.google.cn/topic/libraries/architecture/livedata?hl=zh_cn" target="_blank" rel="noopener">安卓开发者-liveData</a>,值得好好研究</p>
 <h3 id="chapter2">
 分析一下思路
 </h3>
 <p>其实呢，只是实现一个小功能，但由于之前没用过，所以显得好像有些复杂的样子。</p>
 <p>具体就是两个Activity,数据需要从服务器请求回来，然后两个页面的数据是一样的，当一个页面修改时，希望另一个页面也能同步修改。</p>
-<p>我考虑用retrofit + kotlin协程来实现网络请求的部分，具体不写了。业务逻辑写在ViewModel中，配合liveData来存储数据实现同步。 其实思路是很简单的，实现也不难，要注意的一点就是，在activity中的创建的viewModel对象是不同的，当然，这是非常正常的(正常来说new两个不同对象肯定是不同的。。。这不是废话吗)。但是 在同一个Activity下的两个fragment中使用创建出来的两个对象其实是一样的，在文档上是这样说的 &gt; 请注意，这两个 Fragment 都会检索包含它们的 Activity。这样，当这两个 Fragment 各自获取 ViewModelProvider 时，它们会收到相同的 SharedViewModel 实例（其范围限定为该 Activity）。 所以，两个fragment共享数据就没什么难度。</p>
+<p>我考虑用retrofit + kotlin协程来实现网络请求的部分，具体不写了。业务逻辑写在ViewModel中，配合liveData来存储数据实现同步。 其实思路是很简单的，实现也不难，要注意的一点就是，在activity中的创建的viewModel对象是不同的，当然，这是非常正常的(正常来说new两个不同对象肯定是不同的。。。这不是废话吗)。但是 在同一个Activity下的两个fragment中使用创建出来的两个对象其实是一样的，在文档上是这样说的</p>
+<blockquote>
+<p>请注意，这两个 Fragment 都会检索包含它们的 Activity。这样，当这两个 Fragment 各自获取 ViewModelProvider 时，它们会收到相同的 SharedViewModel 实例（其范围限定为该 Activity）。 所以，两个fragment共享数据就没什么难度。</p>
+</blockquote>
 <p>那么我们实现两个activity中共享数据也差不多是这样，反正存储数据的是liveData,只要用的LiveData是同一个就行。fragment中用的是同一个viewModel对象，那viewModel对象里定义的liveData也是同一个。所以这样理解没什么问题吧。。。</p>
-<p>并且在文档中还有这样一句话 &gt; LiveData 对象具有生命周期感知能力，这一事实意味着您可以在多个 Activity、Fragment 和 Service 之间共享这些对象。为使示例保持简单，您可以将 LiveData 类实现为一个单例，</p>
+<p>并且在文档中还有这样一句话</p>
+<blockquote>
+<p>LiveData 对象具有生命周期感知能力，这一事实意味着您可以在多个 Activity、Fragment 和 Service 之间共享这些对象。为使示例保持简单，您可以将 LiveData 类实现为一个单例，</p>
+</blockquote>
 <p>没错，所以我实现avtivity共享数据的方法，我能想到的就是实现一个单例的LiveData类。也不知道有没有别的好方法。</p>
 <h3 id="chapter3">
 贴一下代码
@@ -363,25 +387,15 @@
 <ul>
 <li>MyLiveData代码</li>
 </ul>
-<p><code> // LiveData需要填入具体的类，不能为泛型了，并且将两个override的方法设为public class MyLiveData private constructor() : LiveData<bean>() { companion object { val instance: MyLiveData by lazy { MyLiveData() } }</bean></code></p>
-<pre><code>public override fun postValue(value: Bean?) {
-    super.postValue(value)
-}
-
-public override fun setValue(value: Bean?) {
-    super.setValue(value)
-}</code></pre>
-<p>} </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	// LiveData需要填入具体的类，不能为泛型了，并且将两个override的方法设为public</span><br><span class="line">class MyLiveData private constructor() : LiveData&lt;Bean&gt;() &#123;</span><br><span class="line">    companion object &#123;</span><br><span class="line">        val instance: MyLiveData by lazy &#123;</span><br><span class="line">            MyLiveData()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override fun postValue(value: Bean?) &#123;</span><br><span class="line">        super.postValue(value)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public override fun setValue(value: Bean?) &#123;</span><br><span class="line">        super.setValue(value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>MyViewModel中使用</li>
 </ul>
-<p><code> // 创建实例 val livedata:MyLiveData = MyLiveData.instance</code></p>
-<p>// 在协程中获取数据并设置 livedata.value = bean </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 创建实例</span><br><span class="line">val livedata:MyLiveData = MyLiveData.instance</span><br><span class="line"></span><br><span class="line">// 在协程中获取数据并设置</span><br><span class="line">livedata.value = bean</span><br></pre></td></tr></table></figure>
 <ul>
 <li>不同activity中使用</li>
 </ul>
-<p><code> //创建 private val myModel: MyViewModel中使用 by viewModels()</code></p>
-<p>//观察liveData的变化 myModel.livedata.observe(this, Observer { it?.let { it1 -&gt; do something } }) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//创建</span><br><span class="line"> private val myModel: MyViewModel中使用 by viewModels()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//观察liveData的变化</span><br><span class="line"> myModel.livedata.observe(this,</span><br><span class="line">            Observer &#123;</span><br><span class="line">                it?.let &#123; it1 -&gt; do something &#125;</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
 <p>大概思路就是这样吧，也不完整，太完整以后来看可能就直接抄了。。。</p>
 <h3 id="chapter4">
 还有其他的东西

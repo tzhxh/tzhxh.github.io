@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="android提供了大量的view来与用户进行交互并显示不同种类的数据，但当由特殊的需求时，内置的view也不一定能实现我们的需求，这个时候就需要我们定义自己需要的view">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-30T14:03:03.792Z">
+<meta property="og:updated_time" content="2022-03-18T09:25:10.187Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于安卓自定义控件">
 <meta name="twitter:description" content="android提供了大量的view来与用户进行交互并显示不同种类的数据，但当由特殊的需求时，内置的view也不一定能实现我们的需求，这个时候就需要我们定义自己需要的view">
@@ -302,13 +302,19 @@
       
         <p>android提供了大量的view来与用户进行交互并显示不同种类的数据，但当由特殊的需求时，内置的view也不一定能实现我们的需求，这个时候就需要我们定义自己需要的view</p>
 <a id="more"></a>
-<p>设计良好的类总是相似的。它使用一个好用的接口来封装一个特定的功能，它有效的使用CPU与内存，等等。为了成为一个设计良好的类，自定义的view应该: - 遵守Android标准规则。 - 提供自定义的风格属性值并能够被Android XML Layout所识别 - 发出可访问的事件。 - 能够兼容Android的不同平台。</p>
+<p>设计良好的类总是相似的。它使用一个好用的接口来封装一个特定的功能，它有效的使用CPU与内存，等等。为了成为一个设计良好的类，自定义的view应该:</p>
+<ul>
+<li><p>遵守Android标准规则。</p></li>
+<li><p>提供自定义的风格属性值并能够被Android XML Layout所识别</p></li>
+<li><p>发出可访问的事件。</p></li>
+<li><p>能够兼容Android的不同平台。</p></li>
+</ul>
 <p><strong>目录</strong></p>
 <ul>
-<li><a href="step1">创建自定义view类</a></li>
-<li><a href="step2">绘制自定义view类</a></li>
-<li><a href="step3">提供交互</a></li>
-<li><a href="step4">优化自定义view</a></li>
+<li><p><a href="step1">创建自定义view类</a></p></li>
+<li><p><a href="step2">绘制自定义view类</a></p></li>
+<li><p><a href="step3">提供交互</a></p></li>
+<li><p><a href="step4">优化自定义view</a></p></li>
 </ul>
 <h3 id="step1">
 创建自定义view类
@@ -317,26 +323,31 @@
 继承一个View
 </h4>
 <p>Android提供的组件都是继承自view,自定义的view可以直接继承View,也可以通过继承一个既有的子类(例如 Button)来节约一点时间。</p>
-<p>继承了View之后，需要提供至少一个构造器， <code> class MyView extends View { public MyView(Context context, AttributeSet attrs) { super(context, attrs); } } </code></p>
+<p>继承了View之后，需要提供至少一个构造器， <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class MyView extends View &#123;</span><br><span class="line">       public MyView(Context context, AttributeSet attrs) &#123;</span><br><span class="line">           super(context, attrs);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
 <h4>
 自定义属性
 </h4>
-<p>为了添加View到ui上，需要通过xml熟悉来指定它的样式以及行为。良好的自定义view可以通过xml添加和改变样式。 - 为自定义view在资源标签下定义自设的属性 - 在你的XML layout中指定属性值 - 在运行时获取属性值 - 把获取到的属性应用到你的view上</p>
-<p>为了定义自设的属性，添加资源到你的项目中。放置于<em>res/values/attrs.xml</em>文件，举个例子： <code> <resources> <declare-styleable name="MyView"> <attr name="showText" format="boolean"> <attr name="labelPosition" format="enum"> <enum name="left" value="0"> <enum name="right" value="1"> </enum></enum></attr> </attr></declare-styleable> </resources> </code> 上面的代码声明了两个自设属性，<strong>showText</strong>和<strong>labelPosition</strong>，他们归属于MyView的项目下的styleable实例，通常与自定义的view名字一致</p>
+<p>为了添加View到ui上，需要通过xml熟悉来指定它的样式以及行为。良好的自定义view可以通过xml添加和改变样式。</p>
+<ul>
+<li><p>为自定义view在资源标签下定义自设的属性</p></li>
+<li><p>在你的XML layout中指定属性值</p></li>
+<li><p>在运行时获取属性值</p></li>
+<li><p>把获取到的属性应用到你的view上</p></li>
+</ul>
+<p>为了定义自设的属性，添加资源到你的项目中。放置于<em>res/values/attrs.xml</em>文件，举个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">   &lt;declare-styleable name=&quot;MyView&quot;&gt;</span><br><span class="line">       &lt;attr name=&quot;showText&quot; format=&quot;boolean&quot; /&gt;</span><br><span class="line">       &lt;attr name=&quot;labelPosition&quot; format=&quot;enum&quot;&gt;</span><br><span class="line">           &lt;enum name=&quot;left&quot; value=&quot;0&quot;/&gt;</span><br><span class="line">           &lt;enum name=&quot;right&quot; value=&quot;1&quot;/&gt;</span><br><span class="line">       &lt;/attr&gt;</span><br><span class="line">   &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
+<p>上面的代码声明了两个自设属性，<strong>showText</strong>和<strong>labelPosition</strong>，他们归属于MyView的项目下的styleable实例，通常与自定义的view名字一致</p>
 <p>当你定义了自设的属性，就可以在layout xml文件中使用他们，就像内置属性一样，唯一不同的是归属于不同的命名空间，再举个例子：</p>
-<p><code> <relativelayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"></relativelayout></code></p>
-<pre><code>    &lt;MyView
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    app:showText=false
-    app:labelPosition=0 /&gt;</code></pre>
-<p> </p>
-<p>如上代码所示 MyView中的属性layout_width，layout_height等和自定义的属性layout_height， labelPosition属于不同命名空间 <code> xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" </code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;</span><br><span class="line"></span><br><span class="line">    	&lt;MyView</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;</span><br><span class="line">        app:showText=false</span><br><span class="line">        app:labelPosition=0 /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>如上代码所示 MyView中的属性layout_width，layout_height等和自定义的属性layout_height， labelPosition属于不同命名空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br></pre></td></tr></table></figure>
 <h4>
 获取自定义属性
 </h4>
 <p>再attr.xml设置了自定义属性后，我们怎么获取再layout xml中设置的属性呢？通常是使用<em>obtainStyledAttributes()</em>来获取属性值。这个方法会传递一个<em>TypedArray</em>对象</p>
-<p>Android资源编译器帮我们做了许多工作来使调用<em>obtainStyledAttributes()</em>更简单，对res目录里的每一个<em><declare-styleable></declare-styleable></em>资源，自动生成的R.java文件定义了存放属性id的数组和常量，常量用来索引数组中的每个属性，我们可以用这些预先定义的常量来从<em>TypedArray</em>中读取属性： <code> class MyView extends View { public MyView(Context context, AttributeSet attrs) { super(context, attrs); TypedArray mTypeArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyView, 0, 0) try { mShowText = mTypeArray.getBoolean(R.styleable.MyView_showText, false); mTextPos = mTypeArray.getInteger(R.styleable.MyView_labelPosition, 0); } finally { mTypeArray.recycle() } } } </code> 清注意TypedArray对象是一个共享资源，必须被在使用后进行回收。</p>
+<p>Android资源编译器帮我们做了许多工作来使调用 <em>obtainStyledAttributes()</em>更简单，对res目录里的每一个<em><declare-styleable></declare-styleable></em>资源，自动生成的R.java文件定义了存放属性id的数组和常量，常量用来索引数组中的每个属性，我们可以用这些预先定义的常量来从<em>TypedArray</em>中读取属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class MyView extends View &#123;</span><br><span class="line">       public MyView(Context context, AttributeSet attrs) &#123;</span><br><span class="line">           super(context, attrs);</span><br><span class="line">            TypedArray mTypeArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyView, 0, 0)</span><br><span class="line">       	try &#123;</span><br><span class="line">       		mShowText = mTypeArray.getBoolean(R.styleable.MyView_showText, false);</span><br><span class="line">      			mTextPos = mTypeArray.getInteger(R.styleable.MyView_labelPosition, 0);</span><br><span class="line">       	&#125; finally &#123;</span><br><span class="line">          		mTypeArray.recycle()</span><br><span class="line">       	&#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>清注意TypedArray对象是一个共享资源，必须被在使用后进行回收。</p>
 <h4>
 添加属性和事件
 </h4>
@@ -345,17 +356,21 @@
 <h3 id="step2">
 绘制自定义view类
 </h3>
-<p>重绘一个自定义的view的最重要的步骤是重写<em>onDraw()</em>方法。<em>onDraw()</em>的参数是一个<em>Canvas</em>对象。<em>Canvas</em>类定义了绘制文本，线条，图像与许多其他图形的方法。你可以在<em>onDraw</em>方法里面使用那些方法来创建你的UI。 具体的绘制会在其他笔记详细的写一下。 简单来说就是在<em>onDraw()</em>提供的<em>Canvas</em>中使用自己创建的<em>Paint</em>来绘制，<em>Canvas</em>是一块画布，<em>Paint</em>是一支笔。两者配合完成绘制</p>
+<p>重绘一个自定义的view的最重要的步骤是重写<em>onDraw()</em>方法。<em>onDraw()</em>的参数是一个<em>Canvas</em>对象。<em>Canvas</em>类定义了绘制文本，线条，图像与许多其他图形的方法。你可以在<em>onDraw</em>方法里面使用那些方法来创建你的UI。</p>
+<p>具体的绘制会在其他笔记详细的写一下。</p>
+<p>简单来说就是在<em>onDraw()</em>提供的<em>Canvas</em>中使用自己创建的<em>Paint</em>来绘制，<em>Canvas</em>是一块画布，<em>Paint</em>是一支笔。两者配合完成绘制</p>
 <p>除了<em>onDraw()</em>方法之外，还有两个重要的方法<em>onMeasure()</em>以及<em>onLayout()</em>。</p>
 <p>在这里主要还是讲一下<a href="#onMeasure">onMeasure()</a>和<a href="#onLayout">onLayout()</a>吧</p>
-<p>首先从整体看 - 测量流程：从根 View 递归调用每一级子 View 的 measure 方法，对它们进行测量。</p>
+<p>首先从整体看</p>
 <ul>
-<li>布局流程：从根 View 递归调用每一级子 View 的 layout 方法，把测量过程得出的子 View 的位置和尺寸传给子 View，子 View 保存。</li>
+<li><p>测量流程：从根 View 递归调用每一级子 View 的 measure 方法，对它们进行测量。</p></li>
+<li><p>布局流程：从根 View 递归调用每一级子 View 的 layout 方法，把测量过程得出的子 View 的位置和尺寸传给子 View，子 View 保存。</p></li>
 </ul>
 <h4 id="onMeasure">
 onMeasure()
 </h4>
-<p><code> override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) { super.onMeasure(widthMeasureSpec, heightMeasureSpec) } </code> 如上所示，<em>onMeasure()</em>有两个参数。参数即父类传过来的两个宽高的"建议值"，即把当前view的高设置为：<em>heightMeasureSpec</em> ;宽设置为：<em>widthMeasureSpec</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) &#123;</span><br><span class="line">        super.onMeasure(widthMeasureSpec, heightMeasureSpec)</span><br><span class="line">    &#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p>如上所示，<em>onMeasure()</em>有两个参数。参数即父类传过来的两个宽高的"建议值"，即把当前view的高设置为：<em>heightMeasureSpec</em> ;宽设置为：<em>widthMeasureSpec</em></p>
 <p>这个参数不是简单的整数类型，而是2位整数(模式类型)和30位整数(实际数值) 的组合</p>
 <ul>
 <li><p>UNSPECIFIED(未指定)，父元素部队自元素施加任何束缚，子元素可以得到任意想要的大小；UNSPECIFIED=00000000000000000000000000000000</p></li>
@@ -363,19 +378,26 @@ onMeasure()
 <li><p>AT_MOST(至多)，子元素至多达到指定大小的值。 他们对应的二进制值分别是： AT_MOST =10000000000000000000000000000000</p></li>
 </ul>
 <p>最前面两位代表模式，分别对应十进制的0，1，2；</p>
-<p>获取模式int值 和 获取数值int值的方法： 1 <em>int measureWidth = MeasureSpec.getSize(widthMeasureSpec);</em> 2 <em>int measureHeight = MeasureSpec.getSize(heightMeasureSpec);</em> 3 <em>int measureWidthMode = MeasureSpec.getMode(widthMeasureSpec);</em> 4 <em>int measureHeightMode = MeasureSpec.getMode(heightMeasureSpec);</em></p>
+<p>获取模式int值 和 获取数值int值的方法：</p>
+<ol type="1">
+<li><p><em>int measureWidth = MeasureSpec.getSize(widthMeasureSpec);</em></p></li>
+<li><p><em>int measureHeight = MeasureSpec.getSize(heightMeasureSpec);</em></p></li>
+<li><p><em>int measureWidthMode = MeasureSpec.getMode(widthMeasureSpec);</em></p></li>
+<li><p><em>int measureHeightMode = MeasureSpec.getMode(heightMeasureSpec);</em></p></li>
+</ol>
 <p>模式的值有:</p>
 <ul>
-<li>MeasureSpec.AT_MOST = 2 = wrap_content</li>
-<li>MeasureSpec.EXACTLY = 1 = match_parent</li>
-<li>MeasureSpec.UNSPECIFIED = 0 = 具体值</li>
+<li><p>MeasureSpec.AT_MOST = 2 = wrap_content</p></li>
+<li><p>MeasureSpec.EXACTLY = 1 = match_parent</p></li>
+<li><p>MeasureSpec.UNSPECIFIED = 0 = 具体值</p></li>
 </ul>
 <p>当为match_parent或者用户设置的具体值时，我们可以不用理会，但是当wrap_content时，我们需要设置一个数值，否则就会造成wrap_content和match_parent是一样的效果</p>
 <p>使用<em>setMeasuredDimension(int measuredWidth, int measuredHeight);</em>方法，将你要设的大小设置进去</p>
 <h4 id="onLayout">
 onLayout()
 </h4>
-<p><code> override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) { super.onLayout(changed, l, t, r, b) } </code> 如上代码所示，该方法中的后四个参数代表了4条边的位置，我们可以通过设置四条边来确定摆放的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) &#123;</span><br><span class="line">    super.onLayout(changed, l, t, r, b)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上代码所示，该方法中的后四个参数代表了4条边的位置，我们可以通过设置四条边来确定摆放的位置。</p>
 <h3 id="step3">
 提供交互
 </h3>
@@ -386,14 +408,13 @@ onLayout()
 <p>用户应该可以感受到UI上的微小变化，并对模仿现实世界的细微之处反应强烈。例如，当用户fling(迅速滑动)一个对象时，应该在开始时感到摩擦带来的阻力，在结束时感到fling带动的动力。应该在滑动开始与结束的时候给用户一定的反馈。</p>
 </blockquote>
 <p>像许多其他UI框架一样，Android提供一个输入事件模型。用户的动作会转换成触发一些回调函数的事件，你可以重写这些回调方法来定制你的程序应该如何响应用户的输入事件。在Android中最常用的输入事件是touch，它会触发<em>onTouchEvent(android.view.MotionEvent))</em>的回调。重写这个方法来处理touch事件：</p>
-<p><code> <span class="citation" data-cites="Override">@Override</span> public boolean onTouchEvent(MotionEvent event) { return super.onTouchEvent(event); } </code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">  return super.onTouchEvent(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Touch事件本身并不是特别有用。如今的touch UI定义了touch事件之间的相互作用，叫做<em>gestures</em>。例如tapping,pulling,flinging与zooming。为了把那些touch的源事件转换成gestures, Android提供了<em>GestureDetector</em>。</p>
 <p>通过传入<em>GestureDetector.OnGestureListener</em>的一个实例构建一个<em>GestureDetector</em>。如果你只是想要处理几种gestures(手势操作)你可以继承<em>GestureDetector.SimpleOnGestureListener</em>，而不用实现<em>GestureDetector.OnGestureListener</em>接口。例如，下面的代码创建一个继承<em>GestureDetector.SimpleOnGestureListener</em>的类，并重写<em>onDown(MotionEvent))</em>。</p>
-<p><code> class MyGestureDetector extends GestureDetector.SimpleOnGestureListener { <span class="citation" data-cites="Override">@Override</span> public boolean onDown(MotionEvent e) { return true; } }</code></p>
-<p>mDetector = new GestureDetector(PieChart.this.getContext(), new MyGestureDetector()); </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  class MyGestureDetector extends GestureDetector.SimpleOnGestureListener &#123;</span><br><span class="line">   @Override</span><br><span class="line">   public boolean onDown(MotionEvent e) &#123;</span><br><span class="line">       return true;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mDetector = new GestureDetector(PieChart.this.getContext(), new MyGestureDetector());</span><br></pre></td></tr></table></figure>
 <p>不管你是否使用<em>GestureDetector.SimpleOnGestureListener</em>, 你必须总是实现<em>onDown()</em>方法，并返回<strong>true</strong>。这一步是必须的，因为所有的<em>gestures</em>都是从<em>onDown()</em>开始的。如果你在<em>onDown()</em>里面返回false，系统会认为你想要忽略后续的<em>gesture</em>,那么<em>GestureDetector.OnGestureListener</em>的其他回调方法就不会被执行到了。</p>
 <p>一旦你实现了<em>GestureDetector.OnGestureListener</em>并且创建了<em>GestureDetector</em>的实例, 你可以使用你的<em>GestureDetector</em>来中止你在<em>onTouchEvent</em>里面收到的touch事件。</p>
-<p><code> <span class="citation" data-cites="Override">@Override</span> public boolean onTouchEvent(MotionEvent event) { boolean result = mDetector.onTouchEvent(event); if (!result) { if (event.getAction() == MotionEvent.ACTION_UP) { stopScrolling(); result = true; } } return result; } </code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public boolean onTouchEvent(MotionEvent event) &#123;</span><br><span class="line">   boolean result = mDetector.onTouchEvent(event);</span><br><span class="line">   if (!result) &#123;</span><br><span class="line">       if (event.getAction() == MotionEvent.ACTION_UP) &#123;</span><br><span class="line">           stopScrolling();</span><br><span class="line">           result = true;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当你传递一个touch事件到onTouchEvent()时，若这个事件没有被辨认出是何种gesture，它会返回false。你可以执行自定义的gesture-decection代码。</p>
 <p>具体内容查看<a href="http://hukai.me/android-training-course-in-chinese/ui/custom-view/make-interactive.html" target="_blank" rel="noopener">这里吧</a></p>
 <h3 id="step4">

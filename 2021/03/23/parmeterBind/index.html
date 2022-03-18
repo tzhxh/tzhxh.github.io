@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="在日常写代码的时候，我们不可能将所有的逻辑，所有的代码都写在一个main函数中。我们往往会将很多代码逻辑写在不同的函数中以便调用，往往这些函数在定义时会写上形参。然而当我们的理解不到位时就会变得混乱">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-28T02:23:34.312Z">
+<meta property="og:updated_time" content="2022-03-18T09:15:51.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于函数传递参数的一点疑问">
 <meta name="twitter:description" content="在日常写代码的时候，我们不可能将所有的逻辑，所有的代码都写在一个main函数中。我们往往会将很多代码逻辑写在不同的函数中以便调用，往往这些函数在定义时会写上形参。然而当我们的理解不到位时就会变得混乱">
@@ -300,51 +300,24 @@
       
 
       
-        <p>在日常写代码的时候，我们不可能将所有的逻辑，所有的代码都写在一个main函数中。我们往往会将很多代码逻辑写在不同的函数中以便调用，往往这些函数在定义时会写上形参。然而当我们的理解不到位时就会变得混乱 <a id="more"></a> 我们先来看几个例子： 例 1： <code></code></p>
-<pre><code>public class Main {
-public static void main(String[] args) {
-    int i = 0;
-    change(i);
-    System.out.println(i);
-}
-
-public static void change(int j){
-    j = 1;
-}</code></pre>
-<p>}</p>
-<p> 这段代码会输出什么呢？ 0 还是 1？ 答案是0。</p>
+        <p>在日常写代码的时候，我们不可能将所有的逻辑，所有的代码都写在一个main函数中。我们往往会将很多代码逻辑写在不同的函数中以便调用，往往这些函数在定义时会写上形参。然而当我们的理解不到位时就会变得混乱 <a id="more"></a> 我们先来看几个例子： 例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int i = 0;</span><br><span class="line">        change(i);</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void change(int j)&#123;</span><br><span class="line">        j = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码会输出什么呢？ 0 还是 1？ 答案是0。</p>
 <p>那么这个呢</p>
-<p>例 2： <code></code></p>
-<p>public class Main { public static void main(String[] args) { int[] s = {0, 1}; change(s); System.out.println(s[0]); }</p>
-<pre><code>public static void change(int[] temp){
-    temp[0] = 2;
-}</code></pre>
-<p>}</p>
-<p> 这个的结果又会是什么呢？ 0还是2？ 答案是2。</p>
-<p>例 3： <code></code></p>
-<p>public class Main { public static void main(String[] args) { int[] s = {0, 1}; change(s); System.out.println(s[0]); }</p>
-<pre><code>public static void change(int[] temp){
-    temp = new int[]{2, 1};
-}</code></pre>
-<p>}</p>
-<p></p>
+<p>例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] s = &#123;0, 1&#125;;</span><br><span class="line">        change(s);</span><br><span class="line">        System.out.println(s[0]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void change(int[] temp)&#123;</span><br><span class="line">        temp[0] = 2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个的结果又会是什么呢？ 0还是2？ 答案是2。</p>
+<p>例 3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] s = &#123;0, 1&#125;;</span><br><span class="line">        change(s);</span><br><span class="line">        System.out.println(s[0]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void change(int[] temp)&#123;</span><br><span class="line">        temp = new int[]&#123;2, 1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个的结果0，这是为什么呢？</p>
-<p>那么再看 例 4： <code></code></p>
-<pre><code>public class Main {
-public static void main(String[] args) {
-    String s = &quot;1&quot;;
-    change(s);
-    System.out.println(s);
-}
-
-public static void change(String temp){
-    temp = &quot;2&quot;;
-}</code></pre>
-<p>}</p>
-<p></p>
+<p>那么再看</p>
+<p>例 4：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">	public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s = &quot;1&quot;;</span><br><span class="line">        change(s);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void change(String temp)&#123;</span><br><span class="line">        temp = &quot;2&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这一个的结果又是什么？ 答案是1。</p>
 <p>从上面的例子我们可以看出有一些change方法并没有影响到原来的值，这是为什么？</p>
-<p>众所周知，Java的数据类型可以分为两类基本数据类型和引用数据类型(其实很多语言貌似都可以这样分)，像 int, float...之类的是基本数据类型(我认为是那几个以小写字母开头的几个类型)。 而产生区别的也就是两大类型的参数传递之间的差异。我们知道形参只有在调用这个函数时传入了实参才能发挥作用。在之前，我一直认为在传入实参时我传入的是什么，用的就是什么，因此走进了一个误区。 我在查阅资料的时候，发现有些人说是传递的实参是你传递的变量的拷贝，所以基本类型的不会受到影响，而引用类型的虽然也是拷贝，但实际上传的是地址，所以直接修改值会受到影响。 但为了自己好记，我用这种方式来理解，形参实际上是在调用这个方法时创建的一个变量，是一个独立的变量，我们在将实参传入时，其实是将实参赋值给形参的一个过程，那么既然是单独的变量，那就有属于自己的内存。因此，对于基本类型来说， 我们将基本类型传入时，其实是基本类型的赋值，形参拿到了实参的值，但两个是独立的变量，互不影响。对于引用类型来说，也一样是赋值，但引用类型的赋值给的是地址，也就是说形参和实参两个单独的变量都存了同一个地址指向同一个对象，因此例子2和例子3会出先不同的现象也就能够理解，注意例2是对他们所指向的对象进行修改。而例3则是将形参所指向的地址改变了，那么形参和实参指向的就不是同一个地址了，也就不是同一个对象了。至于例4，和例3 是一样的。因为String这个类型特殊一点， s = "1"这个代码就把它当成 String s = new String("1")来理解吧。具体的就先不深究了，后面有时间再看看吧。。。。</p>
+<p>众所周知，Java的数据类型可以分为两类基本数据类型和引用数据类型(其实很多语言貌似都可以这样分)，像 int, float...之类的是基本数据类型(我认为是那几个以小写字母开头的几个类型)。 而产生区别的也就是两大类型的参数传递之间的差异。我们知道形参只有在调用这个函数时传入了实参才能发挥作用。在之前，我一直认为在传入实参时我传入的是什么，用的就是什么，因此走进了一个误区。</p>
+<p>我在查阅资料的时候，发现有些人说是传递的实参是你传递的变量的拷贝，所以基本类型的不会受到影响，而引用类型的虽然也是拷贝，但实际上传的是地址，所以直接修改值会受到影响。</p>
+<p>但为了自己好记，我用这种方式来理解，形参实际上是在调用这个方法时创建的一个变量，是一个独立的变量，我们在将实参传入时，其实是将实参赋值给形参的一个过程，那么既然是单独的变量，那就有属于自己的内存。因此，对于基本类型来说， 我们将基本类型传入时，其实是基本类型的赋值，形参拿到了实参的值，但两个是独立的变量，互不影响。对于引用类型来说，也一样是赋值，但引用类型的赋值给的是地址，也就是说形参和实参两个单独的变量都存了同一个地址指向同一个对象，因此例子2和例子3会出先不同的现象也就能够理解，注意例2是对他们所指向的对象进行修改。而例3则是将形参所指向的地址改变了，那么形参和实参指向的就不是同一个地址了，也就不是同一个对象了。至于例4，和例3 是一样的。因为String这个类型特殊一点， s = "1"这个代码就把它当成 String s = new String("1")来理解吧。具体的就先不深究了，后面有时间再看看吧。。。。</p>
 
       
     </div>

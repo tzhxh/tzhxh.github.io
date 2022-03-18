@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="在使用封装的ajax进行与后台数据传输时发现的一个问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-28T02:54:08.480Z">
+<meta property="og:updated_time" content="2022-03-18T09:10:01.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于post第一次失败，后面可以成功的问题记录">
 <meta name="twitter:description" content="在使用封装的ajax进行与后台数据传输时发现的一个问题">
@@ -302,7 +302,14 @@
       
         <p>在使用封装的ajax进行与后台数据传输时发现的一个问题</p>
 <a id="more"></a>
-<p>第一次post总是会被挂起，status状态为cancel。只有再发送才能成功。 经过在网上查找资料并通过实验得出结论 1. 方法在a标签内触发会导致该问题发生 2. 方法在from表单内使用button标签触发 不写明type属性，会导致失败，猜测可能是不写明type属性就默认为submit。 3. 方法在form内使用button标签触发 type属性为button 成功 4. 方法在form外使用button标签触发 不写明type属性 成功 5. 方法在form外使用button标签触发 type属性为button 成功</p>
+<p>第一次post总是会被挂起，status状态为cancel。只有再发送才能成功。 经过在网上查找资料并通过实验得出结论</p>
+<ol type="1">
+<li><p>方法在a标签内触发会导致该问题发生</p></li>
+<li><p>方法在from表单内使用button标签触发 不写明type属性，会导致失败，猜测可能是不写明type属性就默认为submit。</p></li>
+<li><p>方法在form内使用button标签触发 type属性为button 成功</p></li>
+<li><p>方法在form外使用button标签触发 不写明type属性 成功</p></li>
+<li><p>方法在form外使用button标签触发 type属性为button 成功</p></li>
+</ol>
 <p>因此猜测可能是在form表单内使用submit，会导致表单提交。 因此和ajax产生冲突，导致ajax被中断。</p>
 
       

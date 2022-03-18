@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="jsp,web,javabean,mysql,servlet,2019,">
+  <meta name="keywords" content="jsp,web,servlet,javabean,mysql,2019,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="用jsp+servlet+Javabean实现登录跳转并对数据库进行操作">
-<meta name="keywords" content="jsp,web,javabean,mysql,servlet,2019">
+<meta name="keywords" content="jsp,web,servlet,javabean,mysql,2019">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jsp+servlet+javabean实现对数据库的操作">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/jsp-servlet-javabean/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet-javabean/1.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/20/jsp-servlet-javabean/2.png">
-<meta property="og:updated_time" content="2021-02-28T02:58:26.662Z">
+<meta property="og:updated_time" content="2022-03-18T09:19:25.923Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jsp+servlet+javabean实现对数据库的操作">
 <meta name="twitter:description" content="用jsp+servlet+Javabean实现登录跳转并对数据库进行操作">
@@ -307,10 +307,12 @@
 <h3>
 工作流程
 </h3>
-<p>1.要对数据库进行操作首先要找到对应的数据库的JDBC，我使用的数据库为MySQL 对应的JDBC文件在MySQL文件夹下的Connector J 8.0文件夹下名为mysql-connector-java-8.0.15 完整的路径为‪C:Files (x86)J 8.0-connector-java-8.0.15.jar 将其导入到编写Javabean文件的编译器中，并将其复制到Tomcat的lib文件夹下</p>
-<p>2.在Tomcat的webapps文件夹下新建一个工程文件夹，可随意命名，我命名为login，将jsp文件存放在该文 件夹下</p>
-<p>3.在login文件夹下新建一个文件夹 命名为WEB-INF，该文件夹用来存放配置文件 web.xml</p>
-<p>4.在WEB-INF文件夹下再新建一个文件夹 命名为classes 用来存放servlet文件和Javabean文件 若文件有包的话，连同包的文件夹一起放在classes下 若无包就直接存放 .class文件</p>
+<ol type="1">
+<li><p>要对数据库进行操作首先要找到对应的数据库的JDBC，我使用的数据库为MySQL 对应的JDBC文件在MySQL文件夹下的Connector J 8.0文件夹下名为mysql-connector-java-8.0.15 完整的路径为‪C:Files (x86)J 8.0-connector-java-8.0.15.jar 将其导入到编写Javabean文件的编译器中，并将其复制到Tomcat的lib文件夹下</p></li>
+<li><p>在Tomcat的webapps文件夹下新建一个工程文件夹，可随意命名，我命名为login，将jsp文件存放在该文 件夹下</p></li>
+<li><p>在login文件夹下新建一个文件夹 命名为WEB-INF，该文件夹用来存放配置文件 web.xml</p></li>
+<li><p>在WEB-INF文件夹下再新建一个文件夹 命名为classes 用来存放servlet文件和Javabean文件 若文件有包的话，连同包的文件夹一起放在classes下 若无包就直接存放 .class文件</p></li>
+</ol>
 <h3>
 简单示例
 </h3>
@@ -1587,11 +1589,11 @@ out.print(info);
           
             <a href="/tags/web/" rel="tag"># web</a>
           
+            <a href="/tags/servlet/" rel="tag"># servlet</a>
+          
             <a href="/tags/javabean/" rel="tag"># javabean</a>
           
             <a href="/tags/mysql/" rel="tag"># mysql</a>
-          
-            <a href="/tags/servlet/" rel="tag"># servlet</a>
           
             <a href="/tags/2019/" rel="tag"># 2019</a>
           

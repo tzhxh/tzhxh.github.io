@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hello World">
 <meta property="og:description" content="从使用场景和常用命令来记录一下git的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2022-01-06T09:04:12.833Z">
+<meta property="og:updated_time" content="2022-03-18T09:21:16.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git使用小结">
 <meta name="twitter:description" content="从使用场景和常用命令来记录一下git的使用">
@@ -306,12 +306,12 @@
 <p>git clone 命令</p>
 <h5 id="场景二-远程有一个空仓库本地有一个项目将本地项目推上远程仓库">场景二： 远程有一个空仓库，本地有一个项目，将本地项目推上远程仓库</h5>
 <ol type="1">
-<li>git init 初始化项目为git项目</li>
-<li>git remote add origin + 远程仓库地址 链接到远程仓库</li>
-<li>git add ./ 将代码添加到暂存区</li>
-<li>git commit -m “提交的代码的一些说明” 提交暂存区的代码到本地</li>
-<li>git push origin/对应分支 推到远程仓库</li>
-<li>使用git push --set-upstream origin/对应分支 推到远程仓库并且后续使用push可以不用输入origin/对应分支</li>
+<li><p>git init 初始化项目为git项目</p></li>
+<li><p>git remote add origin + 远程仓库地址 链接到远程仓库</p></li>
+<li><p>git add ./ 将代码添加到暂存区</p></li>
+<li><p>git commit -m “提交的代码的一些说明” 提交暂存区的代码到本地</p></li>
+<li><p>git push origin/对应分支 推到远程仓库</p></li>
+<li><p>使用git push --set-upstream origin/对应分支 推到远程仓库并且后续使用push可以不用输入origin/对应分支</p></li>
 </ol>
 <h5 id="场景三-本地有一个分支但远程仓库没有分支将本地分支推到远程仓库并建立对应分支">场景三： 本地有一个分支，但远程仓库没有分支将本地分支推到远程仓库并建立对应分支</h5>
 <ol type="1">
@@ -319,29 +319,30 @@
 </ol>
 <h5 id="场景四-基于以存在的分指创建一个新的本地分支并推上远程仓库">场景四： 基于以存在的分指创建一个新的本地分支，并推上远程仓库</h5>
 <ol type="1">
-<li>git checkout -b 要创建的分支名 被基于的分支名 说明： 被基于的分支名可以不填，那就是基于当前的本地分支， 也可以填origin/分支名，那就是基于远程分支</li>
-<li>git push origin/对应分支</li>
+<li><p>git checkout -b 要创建的分支名 被基于的分支名 说明： 被基于的分支名可以不填，那就是基于当前的本地分支， 也可以填origin/分支名，那就是基于远程分支</p></li>
+<li><p>git push origin/对应分支</p></li>
 </ol>
 <h5 id="场景五-提交了错误代码并推到了远程需要撤回">场景五： 提交了错误代码并推到了远程，需要撤回</h5>
 <ol type="1">
-<li>git reset --soft/hard HEAD^ 这个操作可以撤销一步 说明： 参数使用soft的话，撤销提交后会保留代码，使用hard的话，撤销提交后代码不会被保留。</li>
-<li>git push --force 强制提交到远程仓库 说明： git reset --soft/hard 后面可以跟参数撤销某一次指定的提交 参数可以通过git log来查看提交的日志</li>
+<li><p>git reset --soft/hard HEAD^ 这个操作可以撤销一步 说明： 参数使用soft的话，撤销提交后会保留代码，使用hard的话，撤销提交后代码不会被保留。</p></li>
+<li><p>git push --force 强制提交到远程仓库 说明： git reset --soft/hard 后面可以跟参数撤销某一次指定的提交 参数可以通过git log来查看提交的日志</p></li>
 </ol>
 <h5 id="场景六-本地代码修改过后需要提交到远程">场景六： 本地代码修改过后需要提交到远程</h5>
 <ol type="1">
-<li>git pull 拉下最新代码</li>
-<li>git checkout 切换到自己的分支</li>
-<li>git merge master 合并主分支代码</li>
-<li>git add./ 提交代码到暂存区</li>
-<li>git commit -m ‘’ 提到暂存区代码到本地</li>
-<li>git push 推到远端</li>
+<li><p>git pull 拉下最新代码</p></li>
+<li><p>git checkout 切换到自己的分支</p></li>
+<li><p>git merge master 合并主分支代码</p></li>
+<li><p>git add./ 提交代码到暂存区</p></li>
+<li><p>git commit -m ‘’ 提到暂存区代码到本地</p></li>
+<li><p>git push 推到远端</p></li>
 </ol>
-<h5 id="在错误的分支写代码">在错误的分支写代码</h5>
+<h5 id="场景七-在错误的分支写代码">场景七 在错误的分支写代码</h5>
 <ol type="1">
-<li>git stash save ‘本次存储的说明或者名称’ 将代码新增的代码存起来</li>
-<li>git checkout 切换到正确的分支</li>
-<li>git stash pop 将存储的代码推出栈顶的那一个 说明： git shash pop 可以输入参数推出指定的某一次存储的代码</li>
+<li><p>git stash save ‘本次存储的说明或者名称’ 将代码新增的代码存起来</p></li>
+<li><p>git checkout 切换到正确的分支</p></li>
+<li><p>git stash pop 将存储的代码推出栈顶的那一个</p></li>
 </ol>
+<p>说明： git shash pop 可以输入参数推出指定的某一次存储的代码</p>
 <h4 id="常用命令解析">常用命令解析</h4>
 <h5 id="git-clone">git clone</h5>
 <p>从远程分支克隆代码下来到本地</p>
@@ -354,7 +355,8 @@
 <h5 id="git-push">git push</h5>
 <p>将本地的提交推到远端 ，当后面有远程分支名时，表示push到指定分支，若远程仓库不存在该分支，则会自动创建，具体命令为 git push origin/分支名。还可以使用参数 --set-upstream与远程仓库的对应分支进行关联，后续直接使用git push就可以推到该分支不必每次输入后面的远程分支名。具体命令为 git push --set-upstream origin/分支名</p>
 <h5 id="git-branch">git branch</h5>
-<p>查看分支，有参数r 表示查看远程分支，具体命令为 git branch -r。还有参数a表示查看全部分支 git branch newBranch orogin/branchName 表示创建一个新的本地分支并关联远程已经存在的分支</p>
+<p>查看分支，有参数r 表示查看远程分支，具体命令为 git branch -r。还有参数a表示查看全部分支</p>
+<p>git branch newBranch orogin/branchName 表示创建一个新的本地分支并关联远程已经存在的分支</p>
 <h5 id="git-checkout-分支名">git checkout 分支名</h5>
 <p>切换分支，有参数b表示基于某一分之创建新分支，具体命令为 git checkout -b newBranch [branchName]</p>
 <h5 id="git-pull">git pull</h5>
@@ -362,9 +364,15 @@
 <h5 id="git-fetch">git fetch</h5>
 <p>从远端拉取最新代码，但不merge，需要自己使用merge命令 说明： 还有其他区别，但我不太清楚</p>
 <h5 id="git-reset---softhard-某一次提交">git reset --soft/hard 某一次提交</h5>
-<p>可以撤销某一次提交， 如果是HEAD^，表示提交最近的一次提交，具体命令为git reset --soft/hard HEAD<sup>，如果是HEAD</sup>^，可以表示撤销最近的两次提交。 此外，可以通过git log 命令查看提交记录，并看到每次提交的id，通过这个来撤销指定的某一次提交，具体操作我得再看看。。。 此外，soft/hard 是表示两种不同的模式，如果是soft则撤销后代码会保留，当成新的修改。如果是hard则撤销后代码消失，不被保留。</p>
+<p>可以撤销某一次提交， 如果是HEAD^，表示提交最近的一次提交，具体命令为git reset --soft/hard HEAD<sup>，如果是HEAD</sup>^，可以表示撤销最近的两次提交。</p>
+<p>此外，可以通过git log 命令查看提交记录，并看到每次提交的id，通过这个来撤销指定的某一次提交，具体操作我得再看看。。。</p>
+<p>此外，soft/hard 是表示两种不同的模式，如果是soft则撤销后代码会保留，当成新的修改。如果是hard则撤销后代码消失，不被保留。</p>
 <h5 id="git-stash">git stash</h5>
-<p>存储代码或者将代码从存储中取出 使用git stash save ‘label’ 就是将修改的代码存储起来 使用git stash pop 就是将存储起来的代码取出来，不加任何的参数就说取出栈顶的那个， 可以使用git stash list 查看存储的列表 还有个git stash apply 命令，具体使用还不清楚</p>
+<p>存储代码或者将代码从存储中取出</p>
+<p>使用git stash save ‘label’ 就是将修改的代码存储起来</p>
+<p>使用git stash pop 就是将存储起来的代码取出来，不加任何的参数就说取出栈顶的那个，</p>
+<p>可以使用git stash list 查看存储的列表</p>
+<p>还有个git stash apply 命令，具体使用还不清楚</p>
 <h5 id="git-status">git status</h5>
 <p>查看当前的git状态</p>
 <h5 id="git-log">git log</h5>
